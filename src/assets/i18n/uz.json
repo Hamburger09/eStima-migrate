@@ -1,0 +1,238 @@
+{
+  "PAGINATION": {
+    "LAST_PAGE": "Oxirgi sahifa"
+  },
+  "USERS": {
+    "USERS": "Foydalanuvchilar",
+    "EDIT_USER": "Foydalanuvchini tahrirlash",
+    "ADD_USER": "Foydalanuvchi qo‘shish",
+    "DELETE_USER_TITLE": "Foydalanuvchini o‘chirish",
+    "DELETE_USER_CONFIRM": "Ushbu foydalanuvchini o‘chirishni istaysizmi?",
+    "USER_ID": "Foydalanuvchi IDsi",
+    "USER_CLIENT_ID": "Foydalanuvchi mijoz IDsi",
+    "USER_LOGIN": "Foydalanuvchi logini",
+    "USER_PASSWORD": "Parol",
+    "FIO": "F.I.Sh.",
+    "PHONE": "Telefon",
+    "EMAIL": "Elektron pochta",
+    "ORGANIZATION": "Tashkilot",
+    "COUNTRY": "Mamlakat",
+    "CITY": "Shahar",
+    "STATUS": "Holat",
+    "ROLE": "Rol",
+    "GUID": "GUID",
+    "LAST_LOGIN": "Oxirgi kirish",
+    "IP_ADDRESS": "IP manzil",
+    "PLACEHOLDERS": {
+      "ENTER_LOGIN": "Loginni kiriting",
+      "ENTER_NAME": "Ismni kiriting",
+      "ENTER_CLIENT_ID": "Mijoz ID sini kiriting",
+      "ENTER_PASSWORD": "Parolni kiriting",
+      "ENTER_FIO1": "1-qism F.I.Sh. kiriting",
+      "ENTER_FIO2": "2-qism F.I.Sh. kiriting",
+      "ENTER_FIO3": "3-qism F.I.Sh. kiriting",
+      "ENTER_PHONE": "Telefon raqamini kiriting",
+      "ENTER_EMAIL": "Elektron pochtani kiriting",
+      "ENTER_GUID": "GUID kiriting"
+    },
+    "SELECT": {
+      "ORGANIZATION": "Tashkilotni tanlang",
+      "COUNTRY": "Mamlakatni tanlang",
+      "CITY": "Shaharni tanlang"
+    }
+  },
+  "SELECT": {
+    "ROLE": "Rolni tanlang",
+    "COUNTRY": "Mamlakatni tanlang",
+    "CITY": "Shaharni tanlang",
+    "ORGANIZATION": "Tashkilotni tanlang",
+    "USER": "Foydalanuvchini tanlang",
+    "OR": "yoki"
+  },
+  "TRANSFERS": {
+    "NOTE": "Izoh",
+    "TRANSFER_TYPE": "O‘tkazma turi",
+    "TRANSFER_DATE": "O‘tkazma sanasi",
+    "SENDER": "O‘tkazma yuboruvchisi",
+    "RECIPIENT": "O‘tkazma qabul qiluvchisi",
+    "SEND_TRANSFER": "O‘tkazmani yuborish",
+    "CONFIRM_TRANSFER": "O‘tkazmani tasdiqlash",
+    "TRANSFER_DETAILS": "O‘tkazma tafsilotlari"
+  },
+  "CONSTRUCTION": {
+    "CONSTRUCTION": "Qurilish",
+    "SEND": {
+      "SVOD_RESOURCE_PRICE": "Svod resurs narxini yuborish",
+      "SVOD_RESOURCE_PRICE_MODAL": "Svod resurs narxini yuborish modal oynasi",
+      "SVOD_RESOURCE_PRICE_CONFIRM": "Svod resurs narxini yuborishni xohlaysizmi?"
+    },
+    "ERRORS": {
+      "DELETE": "Siz ushbu qurilishni o‘chirishingiz mumkin emas.",
+      "OPEN_ONE": "Siz bir vaqtning o‘zida faqat bitta qurilishni ochishingiz mumkin.",
+      "ONE_TO_DELETE": "Iltimos, o‘chirish uchun bitta qurilishni tanlang.",
+      "ONLY_ONE_TO_DELETE": "Siz bir vaqtning o‘zida faqat bitta qurilishni o‘chirishingiz mumkin.",
+      "NO_AVAILABLE_USERS": "Qo‘shish uchun mavjud foydalanuvchilar yo‘q.",
+      "ONE_TO_ADD": "Iltimos, qo‘shish uchun bitta qurilishni tanlang.",
+      "ONLY_ONE_TO_ADD": "Siz bir vaqtning o‘zida faqat bitta qurilishni qo‘shishingiz mumkin.",
+      "CHANGE_RESOURCE_TO_SEND": "Iltimos, yuborishdan oldin resursni o‘zgartiring."
+    },
+    "ADD_USER_TO_CONSTRUCTION": "Foydalanuvchini qurilishga qo‘shish",
+    "OBJECTS_SMETAS": "Obyektlar va smetalar",
+    "SVOD_RESOURCES": "Resurslar bo‘yicha umumlashtirish",
+    "CODE": "Kod",
+    "NAME": "Ishlar va xarajatlar nomi",
+    "UNIT": "O‘lchov birligi",
+    "QUANTITY": "Miqdori",
+    "PRICE": "Narxi",
+    "ONE": "Birlik uchun",
+    "TOTAL": "Jami"
+  },
+  "ROLES": {
+    "ROLES": "Rollar",
+    "EDIT_ROLE": "Rolni tahrirlash",
+    "ADD_ROLE": "Rol qo‘shish",
+    "DELETE_ROLE_CONFIRM": "Ushbu rolni o‘chirishni istaysizmi?",
+    "ROLE_ID": "Rol IDsi",
+    "ROLE_NAME": "Rol nomi",
+    "ROLE_DESCRIPTION": "Rol tavsifi",
+    "ROLE_STATUS": "Rol holati",
+    "PLACEHOLDERS": {
+      "ENTER_ROLE_NAME": "Rol nomini kiriting",
+      "ENTER_DESCRIPTION": "Tavsifni kiriting"
+    }
+  },
+  "ORGANIZATIONS": {
+    "ORGANIZATIONS": "Tashkilotlar",
+    "EDIT_ORGANIZATION": "Tashkilotni tahrirlash",
+    "ADD_ORGANIZATION": "Tashkilot qo‘shish",
+    "DELETE_ORGANIZATION_CONFIRM": "Ushbu tashkilotni o‘chirishni istaysizmi?",
+    "ORGANIZATION_ID": "Tashkilot IDsi",
+    "ORGANIZATION_NAME": "Tashkilot nomi",
+    "ORGANIZATION_DESCRIPTION": "Tashkilot tavsifi",
+    "ORGANIZATION_STATUS": "Tashkilot holati",
+    "PLACEHOLDERS": {
+      "ENTER_ORGANIZATION_NAME": "Tashkilot nomini kiriting",
+      "ENTER_DESCRIPTION": "Tavsifni kiriting"
+    }
+  },
+  "COUNTRIES": {
+    "COUNTRIES": "Mamlakatlar",
+    "EDIT_COUNTRY": "Mamlakatni tahrirlash",
+    "ADD_COUNTRY": "Mamlakat qo‘shish",
+
+    "DELETE_COUNTRY_TITLE": "Mamlakatni o‘chirish",
+    "DELETE_COUNTRY_CONFIRM": "Ushbu mamlakatni o‘chirishni istaysizmi?",
+    "COUNTRY_ID": "Mamlakat IDsi",
+    "COUNTRY_NAME": "Mamlakat nomi",
+    "COUNTRY_DESCRIPTION": "Mamlakat tavsifi",
+    "COUNTRY_STATUS": "Mamlakat holati",
+    "PLACEHOLDERS": {
+      "ENTER_COUNTRY_NAME": "Mamlakat nomini kiriting",
+      "ENTER_DESCRIPTION": "Tavsifni kiriting"
+    }
+  },
+  "CITIES": {
+    "CITIES": "Shaharlar",
+    "EDIT_CITY": "Shaharni tahrirlash",
+    "ADD_CITY": "Shahar qo‘shish",
+    "DELETE_CITY_TITLE": "Shaharni o‘chirish",
+    "DELETE_CITY_CONFIRM": "Ushbu shaharni o‘chirishni istaysizmi?",
+    "CITY_ID": "Shahar IDsi",
+    "CITY_NAME": "Shahar nomi",
+    "CITY_DESCRIPTION": "Shahar tavsifi",
+    "CITY_STATUS": "Shahar holati",
+    "PLACEHOLDERS": {
+      "ENTER_CITY_NAME": "Shahar nomini kiriting",
+      "SELECT_COUNTRY": "Mamlakatni tanlang",
+      "ENTER_DESCRIPTION": "Tavsifni kiriting"
+    }
+  },
+  "UPDATES": {
+    "UPDATES": "Yangilanishlar",
+    "UPDATE_ID": "Yangilanish IDsi",
+    "COUNTRY_ID": "Mamlakat IDsi"
+  },
+  "NAV": {
+    "DASHBOARD": "Boshqaruv paneli",
+    "USERS_ACCESS": "Foydalanuvchilar va kirish huquqlari",
+    "ONLINE_USERS": "Onlayn foydalanuvchilar",
+    "ROLES": "Rollar",
+    "OPERATIONS": "Amallar",
+    "ORGANIZATIONS": "Tashkilotlar",
+    "TRANSFERS": "O‘tkazmalar",
+    "INCOMING_TRANSFERS": "Kirish o‘tkazmalari",
+    "OUTGOING_TRANSFERS": "Chiqish o‘tkazmalari",
+    "OBJECTS": "Obyektlar",
+    "CUSTOMER": "Buyurtmachi",
+    "CONTRACTOR": "Pudratchi",
+    "DESIGNER": "Loyihachi",
+    "EXPERT": "Mutaxassis",
+    "GEOGRAPHY": "Geografiya",
+    "COUNTRIES": "Mamlakatlar",
+    "CITIES": "Shaharlar",
+    "MONITORING": "Monitoring",
+    "LOGS": "Jurnallar",
+    "UPDATES": "Yangilanishlar",
+    "DOWNLOADS": "Yuklamalar",
+    "DOWNLOADS_SETUP": "eStimaSetup.zip",
+    "DOWNLOADS_EXE": "eStima.zip"
+  },
+  "EXE": {
+    "DOWNLOADING": "Yuklanmoqda, bu 3 daqiqagacha davom etishi mumkin...",
+    "DOWNLOAD_COMPLETED": "✅ Yuklash yakunlandi.",
+    "DOWNLOAD_FAILED": "❌ Yuklash amalga oshmadi.",
+    "DOWNLOAD_CANCELED": "❌ Yuklash bekor qilindi."
+  },
+  "COMMON": {
+    "NAME": "Nomi",
+    "DESCRIPTION": "Tavsif",
+    "STATUS": "Holat",
+    "SEND": "Yuborish",
+    "ACTIONS": "Amallar",
+    "DETAILS": "Tafsilotlar",
+    "EDIT": "Tahrirlash",
+    "DELETE": "O‘chirish",
+    "ADD": "Qo‘shish",
+    "SAVE": "Saqlash",
+    "CLOSE": "Yopish",
+    "CANCEL": "Bekor qilish",
+    "LOADING": "Yuklanmoqda...",
+    "SELECT": "Tanlash",
+    "ACTIVE": "Faol",
+    "INACTIVE": "Nofaol",
+    "OR": "yoki",
+    "NEXT": "Keyingi",
+    "HOME": "Bosh sahifa",
+    "OPEN": "Ochilish",
+    "NO_DATA": "Mavjud ma'lumot yo'q",
+    "DOWNLOAD": "Yuklab olish",
+    "DATE": "Sana",
+    "LOGOUT": "Chiqish",
+    "SEARCH": "Qidirish..."
+  },
+  "LOGIN": {
+    "TITLE": "Tizimga kirish",
+    "DESCRIPTION": "Iltimos, tizimga kirish uchun ma’lumotlaringizni kiriting.",
+    "USERNAME": "Foydalanuvchi nomi",
+    "PASSWORD": "Parol",
+    "LOGIN_BUTTON": "Kirish",
+    "REGISTER": "Ro‘yxatdan o‘tish"
+  },
+  "REGISTER": {
+    "TITLE": "Ro‘yxatdan o‘tish",
+    "DESCRIPTION": "Iltimos, ro‘yxatdan o‘tish formasini to‘ldiring.",
+    "USERNAME": "Foydalanuvchi nomi",
+    "PASSWORD": "Parol",
+    "CONFIRM_PASSWORD": "Parolni tasdiqlang",
+    "EMAIL": "Elektron pochta",
+    "REGISTER_BUTTON": "Ro‘yxatdan o‘tish",
+    "LOGIN_LINK": "Allaqachon akkauntingiz bormi? Kirish",
+    "ERRORS": {
+      "USERNAME_REQUIRED": "Foydalanuvchi nomi majburiy",
+      "PASSWORD_REQUIRED": "Parol majburiy",
+      "PASSWORD_NUMERIC": "Parolda hech bo‘lmaganda bitta raqam bo‘lishi kerak",
+      "PASSWORD_MIN_LENGTH": "Parol kamida 8 ta belgidan iborat bo‘lishi kerak",
+      "PASSWORD_MISMATCH": "Parollar mos emas"
+    }
+  }
+}

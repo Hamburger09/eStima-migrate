@@ -1,0 +1,55 @@
+<div class="dx-ribbon">
+  <dx-tab-panel
+    class="dx-ribbon-tabs"
+    [dataSource]="tabs"
+    [selectedIndex]="selectedIndex"
+    (onSelectionChanged)="
+      onSelectedIndexChange($event.component.option('selectedIndex'))
+    "
+    [animationEnabled]="false"
+    [swipeEnabled]="false"
+    [deferRendering]="false"
+    itemTitleTemplate="title"
+    itemTemplate="content"
+  >
+    <!-- TAB TITLES -->
+    <div *dxTemplate="let tab of 'title'">
+      <span class="dx-ribbon-tab-title">{{ tab.label | translate }}</span>
+    </div>
+
+    <!-- TAB CONTENT = TOOLBAR -->
+    <div *dxTemplate="let tab of 'content'">
+      <dx-toolbar class="dx-ribbon-toolbar">
+        <dxi-item location="before">
+          <div class="dx-ribbon-section-title">
+            {{ tab.label | translate }}
+          </div>
+        </dxi-item>
+
+        <dxi-item location="before">
+          <div class="dx-ribbon-divider"></div>
+        </dxi-item>
+
+        <!-- BUTTONS -->
+        <dxi-item
+          *ngFor="let btn of tab.buttons"
+          location="before"
+          locateInMenu="auto"
+        >
+          <dx-button
+            class="dx-ribbon-btn"
+            [text]="btn.label | translate"
+            [icon]="normalizeIcon(btn.icon)"
+            [type]="getDxType(btn.type)"
+            [stylingMode]="getDxStylingMode(btn.type)"
+            (onClick)="handleAction(btn.action)"
+          ></dx-button>
+        </dxi-item>
+
+        <dxi-item location="after">
+          <div class="dx-ribbon-spacer"></div>
+        </dxi-item>
+      </dx-toolbar>
+    </div>
+  </dx-tab-panel>
+</div>

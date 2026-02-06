@@ -1,0 +1,44 @@
+<dx-popup
+  class="app-modal theme-dependent"
+  [(visible)]="visible"
+  [title]="title"
+  [showTitle]="true"
+  [showCloseButton]="true"
+  [dragEnabled]="true"
+  [resizeEnabled]="true"
+  [hideOnOutsideClick]="backdrop !== 'static'"
+  [width]="width"
+  [height]="height"
+  [maxWidth]="maxWidth"
+  [maxHeight]="maxHeight"
+  [position]="position"
+  [shading]="true"
+  [shadingColor]="shadingColor"
+  (onHiding)="onHiding()"
+  (onHidden)="onHidden()"
+>
+  <!-- body -->
+  <div class="app-modal-body">
+    <ng-content></ng-content>
+  </div>
+
+  <!-- footer slot (optional) -->
+  <div *dxTemplate="let d of 'bottom'" class="app-modal-footer">
+    <ng-content select="[modalFooter]"></ng-content>
+
+    <!-- default buttons if you don't project footer -->
+    <ng-container *ngIf="useDefaultFooter">
+      <dx-button
+        stylingMode="text"
+        [text]="cancelText"
+        (onClick)="close()"
+      ></dx-button>
+      <dx-button
+        type="default"
+        stylingMode="contained"
+        [text]="okText"
+        (onClick)="okClick.emit()"
+      ></dx-button>
+    </ng-container>
+  </div>
+</dx-popup>

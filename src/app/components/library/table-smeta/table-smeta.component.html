@@ -1,0 +1,290 @@
+<!-- <div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th class="text-center" rowspan="2">#</th>
+        <th class="text-center" rowspan="2">
+          {{ "CONSTRUCTION.CODE" | translate }}
+        </th>
+        <th class="text-center" rowspan="2">
+          {{ "CONSTRUCTION.NAME" | translate }}
+        </th>
+        <th class="text-center" rowspan="2" *ngIf="readonly">Progress</th>
+        <th class="text-center" rowspan="2">
+          {{ "CONSTRUCTION.UNIT" | translate }}
+        </th>
+        <th class="text-center" [attr.colspan]="svod_resources ? 1 : 2">
+          {{ "CONSTRUCTION.QUANTITY" | translate }}
+        </th>
+        <th class="text-center" colspan="2">
+          {{ "CONSTRUCTION.PRICE" | translate }}
+        </th>
+      </tr>
+      <tr>
+        <th class="text-center" *ngIf="!svod_resources">
+          {{ "CONSTRUCTION.ONE" | translate }}
+        </th>
+        <th class="text-center" *ngIf="!svod_resources">
+          {{ "CONSTRUCTION.TOTAL" | translate }}
+        </th>
+        <th class="text-center" *ngIf="svod_resources"></th>
+        <th class="text-center">
+          {{ "CONSTRUCTION.ONE" | translate }}
+        </th>
+        <th class="text-center">
+          {{ "CONSTRUCTION.TOTAL" | translate }}
+        </th>
+      </tr>
+    </thead>
+    <tbody *ngIf="!svod_resources">
+      <ng-container *ngFor="let razdel of data; let i = index">
+        <tr
+          (click)="toggleRazdelExpand(razdel.name)"
+          class="table-striped razdel-row"
+        >
+          <td>{{ razdel.num || i + 1 }}</td>
+          <td></td>
+          <td colspan="8" class="d-flex gap-1">
+            <div class="collapse-icon-container">
+              <span class="collapse-icon">
+                <svg
+                  cIcon
+                  [name]="
+                    isRazdelExpanded(razdel.name)
+                      ? 'cilCaretBottom'
+                      : 'cilCaretRight'
+                  "
+                  size="sm"
+                ></svg>
+              </span>
+            </div>
+            {{ razdel.name }}
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td *ngIf="readonly"></td>
+        </tr>
+
+        <ng-container *ngIf="isRazdelExpanded(razdel.name)">
+          <ng-container *ngFor="let work of razdel.works">
+            <tr class="works-row">
+              <td>{{ work.num }}</td>
+              <td
+                (click)="!readonly ? toggleWorkExpand(work.id) : null"
+                class="collapse-icon-container"
+              >
+                <span
+                  class="collapse-icon"
+                  *ngIf="!readonly && work.resurses.length > 0"
+                >
+                  <svg
+                    cIcon
+                    [name]="
+                      isWorkExpanded(work.id)
+                        ? 'cilCaretBottom'
+                        : 'cilCaretRight'
+                    "
+                    size="sm"
+                  ></svg>
+                </span>
+                <span>
+                  {{ work.kode }}
+                </span>
+              </td>
+              <td>{{ work.name }}</td>
+              <td *ngIf="readonly">
+                <div class="d-flex justify-content-between">
+                  <div class="float-start">
+                    <strong
+                      [ngClass]="
+                        66 < 50
+                          ? 'text-danger'
+                          : 66 >= 50 && 66 < 75
+                          ? 'text-warning'
+                          : 'text-success'
+                      "
+                      >66%</strong
+                    >
+                  </div>
+                </div>
+                <c-progress
+                  [height]="10"
+                  [value]="30"
+                  [max]="100"
+                  [color]="
+                    66 < 50
+                      ? 'danger'
+                      : 66 >= 50 && 66 < 75
+                      ? 'warning'
+                      : 'success'
+                  "
+                  [striped]="true"
+                >
+                </c-progress>
+              </td>
+
+              <td>{{ work.gauge_name }}</td>
+
+              <td
+                colspan="2"
+                contenteditable="true"
+                class="text-center"
+                [textContent]="work.kol"
+                (keydown.enter)="onKolSmetaChange(work, $event)"
+                (input)="onKolSmetaInput(work, $event)"
+              ></td>
+              <td class="text-end">{{ work.price }}</td>
+              <td class="text-end">{{ work.summa }}</td>
+            </tr>
+
+            <ng-container *ngIf="readonly ? null : isWorkExpanded(work.id)">
+              <ng-container *ngIf="work.resurses.length > 0; else noResources">
+                <tr *ngFor="let res of work.resurses" class="resources-row">
+                  <td></td>
+                  <td class="text-success">{{ res.kodr }}</td>
+                  <td class="text-start">{{ res.name }}</td>
+                  <td class="text-center">{{ res.gauge_name }}</td>
+                  <td class="text-end">{{ res.norma }}</td>
+                  <td class="text-end">{{ res.rashod }}</td>
+                  <td class="text-end">{{ res.price }}</td>
+                  <td class="text-end">{{ res.summa }}</td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </tbody>
+    <tbody *ngIf="svod_resources">
+      <ng-container *ngFor="let razdel of data; let i = index">
+        <tr
+          *ngIf="razdel.svod_resurs.length > 0"
+          (click)="toggleRazdelExpand(razdel.name)"
+          class="table-striped razdel-row"
+        >
+          <td>{{ i + 1 }}</td>
+          <td></td>
+          <td colspan="8" class="d-flex gap-1">
+            <div class="collapse-icon-container">
+              <span class="collapse-icon">
+                <svg
+                  cIcon
+                  [name]="
+                    isRazdelExpanded(razdel.name)
+                      ? 'cilCaretBottom'
+                      : 'cilCaretRight'
+                  "
+                  size="sm"
+                ></svg>
+              </span>
+            </div>
+            {{ razdel.name }}
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td *ngIf="readonly"></td>
+        </tr>
+        <ng-container
+          *ngIf="isRazdelExpanded(razdel.name) && razdel.svod_resurs.length > 0"
+        >
+          <tr
+            *ngFor="let res of razdel.svod_resurs"
+            class="resources-row"
+            [ngClass]="{ 'edited-row': res._edited }"
+          >
+            <td></td>
+            <td>{{ res.kodr || res.kode }}</td>
+            <td class="text-start">{{ res.name }}</td>
+            <td class="text-center">{{ res.gauge_name }}</td>
+            <td class="text-end">{{ res.kol }}</td>
+            <td
+              class="text-center"
+              contenteditable="true"
+              [textContent]="res.price"
+              (keydown.enter)="onSvodResourcesPriceChange(res, $event)"
+              (input)="onSvodResourcesPriceInput(res, $event)"
+            ></td>
+            <td class="text-end">{{ res.summa }}</td>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+</div> -->
+
+<dx-tree-list
+  [dataSource]="treeData"
+  keyExpr="id"
+  parentIdExpr="parentId"
+  [showBorders]="true"
+  [autoExpandAll]="true"
+  [focusedRowEnabled]="true"
+  [allowColumnResizing]="true"
+  [columnResizingMode]="'widget'"
+  [columnAutoWidth]="true"
+  [showRowLines]="true"
+  [showColumnLines]="true"
+  [height]="600"
+  (onEditingStart)="onEditingStart($event)"
+  (onRowPrepared)="onRowPrepared($event)"
+>
+  <dxi-column dataField="num" caption="#" [allowEditing]="false"></dxi-column>
+
+  <dxi-column
+    dataField="kode"
+    caption="{{ 'CONSTRUCTION.CODE' | translate }}"
+  ></dxi-column>
+
+  <dxi-column
+    dataField="name"
+    caption="{{ 'CONSTRUCTION.NAME' | translate }}"
+    cssClass="wrap-column"
+  ></dxi-column>
+
+  <dxi-column
+    dataField="gauge_name"
+    caption="{{ 'CONSTRUCTION.UNIT' | translate }}"
+  ></dxi-column>
+
+  <dxi-column caption="{{ 'CONSTRUCTION.QUANTITY' | translate }}">
+    <dxi-column
+      dataField="kol"
+      caption="{{ 'CONSTRUCTION.ONE' | translate }}"
+      [width]="'auto'"
+    ></dxi-column>
+    <dxi-column
+      dataField="rashod"
+      caption="{{ 'CONSTRUCTION.TOTAL' | translate }}"
+      [visible]="!svod_resources"
+    ></dxi-column>
+  </dxi-column>
+
+  <dxi-column caption="{{ 'CONSTRUCTION.PRICE' | translate }}">
+    <dxi-column
+      dataField="price"
+      caption="{{ 'CONSTRUCTION.PRICE' | translate }}"
+    ></dxi-column>
+    <dxi-column
+      dataField="summa"
+      caption="{{ 'CONSTRUCTION.TOTAL' | translate }}"
+    ></dxi-column>
+  </dxi-column>
+
+  <dxo-editing
+    [allowUpdating]="true"
+    [allowDeleting]="false"
+    [useIcons]="false"
+    mode="cell"
+  >
+  </dxo-editing>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+
+  <dxo-filter-row [visible]="true"> </dxo-filter-row>
+</dx-tree-list>

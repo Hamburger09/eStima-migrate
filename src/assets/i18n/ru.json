@@ -1,0 +1,238 @@
+{
+  "PAGINATION": {
+    "LAST_PAGE": "Последняя страница"
+  },
+  "USERS": {
+    "USERS": "Пользователи",
+    "EDIT_USER": "Редактировать пользователя",
+    "ADD_USER": "Добавить пользователя",
+    "DELETE_USER_TITLE": "Удалить пользователя",
+    "DELETE_USER_CONFIRM": "Вы уверены, что хотите удалить этого пользователя?",
+    "USER_ID": "ID пользователя",
+    "USER_CLIENT_ID": "ID клиента пользователя",
+    "USER_LOGIN": "Логин пользователя",
+    "USER_PASSWORD": "Пароль пользователя",
+    "FIO": "ФИО",
+    "PHONE": "Телефон",
+    "EMAIL": "Электронная почта",
+    "ORGANIZATION": "Организация",
+    "COUNTRY": "Страна",
+    "CITY": "Город",
+    "STATUS": "Статус",
+    "ROLE": "Роль",
+    "GUID": "GUID",
+    "LAST_LOGIN": "Последний вход",
+    "IP_ADDRESS": "IP адрес",
+    "PLACEHOLDERS": {
+      "ENTER_LOGIN": "Введите логин",
+      "ENTER_NAME": "Введите имя",
+      "ENTER_CLIENT_ID": "Введите ID клиента",
+      "ENTER_PASSWORD": "Введите пароль",
+      "ENTER_FIO1": "Введите ФИО1",
+      "ENTER_FIO2": "Введите ФИО2",
+      "ENTER_FIO3": "Введите ФИО3",
+      "ENTER_PHONE": "Введите телефон",
+      "ENTER_EMAIL": "Введите эл. почту",
+      "ENTER_GUID": "Введите GUID"
+    },
+    "SELECT": {
+      "ORGANIZATION": "Выберите организацию",
+      "COUNTRY": "Выберите страну",
+      "CITY": "Выберите город"
+    }
+  },
+  "SELECT": {
+    "ROLE": "Выберите роль",
+    "COUNTRY": "Выберите страну",
+    "CITY": "Выберите город",
+    "ORGANIZATION": "Выберите организацию",
+    "USER": "Выберите пользователя",
+    "OR": "или"
+  },
+  "TRANSFERS": {
+    "NOTE": "Примечание",
+    "TRANSFER_TYPE": "Тип перевода",
+    "TRANSFER_DATE": "Дата перевода",
+    "SENDER": "Отправитель перевода",
+    "RECIPIENT": "Получатель перевода",
+    "SEND_TRANSFER": "Отправить перевод",
+    "CONFIRM_TRANSFER": "Подтвердить перевод",
+    "TRANSFER_DETAILS": "Детали перевода"
+  },
+  "CONSTRUCTION": {
+    "CONSTRUCTION": "Стройка",
+    "SEND": {
+      "SVOD_RESOURCE_PRICE": "Отправить сводную ресурсную цену",
+      "SVOD_RESOURCE_PRICE_MODAL": "Модальное окно отправки сводной ресурсной цены",
+      "SVOD_RESOURCE_PRICE_CONFIRM": "Вы уверены, что хотите отправить сводную ресурсную цену?"
+    },
+    "ERRORS": {
+      "DELETE": "Вы не можете удалить эту стройку.",
+      "OPEN_ONE": "Вы можете открыть только одну стройку за раз.",
+      "ONE_TO_DELETE": "Пожалуйста, выберите одну стройку для удаления.",
+      "ONLY_ONE_TO_DELETE": "Вы можете удалить только одну стройку за раз.",
+      "NO_AVAILABLE_USERS": "Нет доступных пользователей для добавления.",
+      "ONE_TO_ADD": "Пожалуйста, выберите одну стройку для добавления.",
+      "ONLY_ONE_TO_ADD": "Вы можете добавить только одну стройку за раз.",
+      "CHANGE_RESOURCE_TO_SEND": "Пожалуйста, измените ресурс перед отправкой."
+    },
+    "ADD_USER_TO_CONSTRUCTION": "Добавить пользователя к стройке",
+    "OBJECTS_SMETAS": "Объекты и сметы",
+    "SVOD_RESOURCES": "Сводная ресурсная",
+    "CODE": "Обоснование",
+    "NAME": "Наименование работ и затрат",
+    "UNIT": "Ед.изм.",
+    "QUANTITY": "Кол-во",
+    "PRICE": "Цена",
+    "ONE": "За единицу",
+    "TOTAL": "Всего"
+  },
+  "ROLES": {
+    "ROLES": "Роли",
+    "EDIT_ROLE": "Редактировать роль",
+    "ADD_ROLE": "Добавить роль",
+    "DELETE_ROLE_CONFIRM": "Вы уверены, что хотите удалить эту роль?",
+    "ROLE_ID": "ID роли",
+    "ROLE_NAME": "Название роли",
+    "ROLE_DESCRIPTION": "Описание роли",
+    "ROLE_STATUS": "Статус роли",
+    "PLACEHOLDERS": {
+      "ENTER_ROLE_NAME": "Введите название роли",
+      "ENTER_DESCRIPTION": "Введите описание"
+    }
+  },
+  "ORGANIZATIONS": {
+    "ORGANIZATIONS": "Организации",
+    "EDIT_ORGANIZATION": "Редактировать организацию",
+    "ADD_ORGANIZATION": "Добавить организацию",
+    "DELETE_ORGANIZATION_CONFIRM": "Вы уверены, что хотите удалить эту организацию?",
+    "ORGANIZATION_ID": "ID организации",
+    "ORGANIZATION_NAME": "Название организации",
+    "ORGANIZATION_DESCRIPTION": "Описание организации",
+    "ORGANIZATION_STATUS": "Статус организации",
+    "PLACEHOLDERS": {
+      "ENTER_ORGANIZATION_NAME": "Введите название организации",
+      "ENTER_DESCRIPTION": "Введите описание"
+    }
+  },
+  "COUNTRIES": {
+    "COUNTRIES": "Страны",
+    "EDIT_COUNTRY": "Редактировать страну",
+    "ADD_COUNTRY": "Добавить страну",
+
+    "DELETE_COUNTRY_TITLE": "Удалить страну",
+    "DELETE_COUNTRY_CONFIRM": "Вы уверены, что хотите удалить эту страну?",
+    "COUNTRY_ID": "ID страны",
+    "COUNTRY_NAME": "Название страны",
+    "COUNTRY_DESCRIPTION": "Описание страны",
+    "COUNTRY_STATUS": "Статус страны",
+    "PLACEHOLDERS": {
+      "ENTER_COUNTRY_NAME": "Введите название страны",
+      "ENTER_DESCRIPTION": "Введите описание"
+    }
+  },
+  "CITIES": {
+    "CITIES": "Города",
+    "EDIT_CITY": "Редактировать город",
+    "ADD_CITY": "Добавить город",
+    "DELETE_CITY_TITLE": "Удалить город",
+    "DELETE_CITY_CONFIRM": "Вы уверены, что хотите удалить этот город?",
+    "CITY_ID": "ID города",
+    "CITY_NAME": "Название города",
+    "CITY_DESCRIPTION": "Описание города",
+    "CITY_STATUS": "Статус города",
+    "PLACEHOLDERS": {
+      "ENTER_CITY_NAME": "Введите название города",
+      "SELECT_COUNTRY": "Выберите страну",
+      "ENTER_DESCRIPTION": "Введите описание"
+    }
+  },
+  "UPDATES": {
+    "UPDATES": "Обновления",
+    "UPDATE_ID": "ID обновления",
+    "COUNTRY_ID": "ID страны"
+  },
+  "NAV": {
+    "DASHBOARD": "Панель управления",
+    "USERS_ACCESS": "Пользователи и доступ",
+    "ONLINE_USERS": "Пользователи онлайн",
+    "ROLES": "Роли",
+    "OPERATIONS": "Операции",
+    "ORGANIZATIONS": "Организации",
+    "TRANSFERS": "Переводы",
+    "INCOMING_TRANSFERS": "Входящие переводы",
+    "OUTGOING_TRANSFERS": "Исходящие переводы",
+    "OBJECTS": "Объекты",
+    "CUSTOMER": "Заказчик",
+    "CONTRACTOR": "Подрядчик",
+    "DESIGNER": "Проектировщик",
+    "EXPERT": "Эксперт",
+    "GEOGRAPHY": "География",
+    "COUNTRIES": "Страны",
+    "CITIES": "Города",
+    "MONITORING": "Мониторинг",
+    "LOGS": "Журналы",
+    "UPDATES": "Обновления",
+    "DOWNLOADS": "Загрузки",
+    "DOWNLOADS_SETUP": "eStimaSetup.zip",
+    "DOWNLOADS_EXE": "eStima.zip"
+  },
+  "EXE": {
+    "DOWNLOADING": "Загрузка, это может занять до 3 минут...",
+    "DOWNLOAD_COMPLETED": "✅ Загрузка завершена.",
+    "DOWNLOAD_FAILED": "❌ Загрузка не удалась.",
+    "DOWNLOAD_CANCELED": "❌ Загрузка отменена."
+  },
+  "COMMON": {
+    "NAME": "Название",
+    "DESCRIPTION": "Описание",
+    "STATUS": "Статус",
+    "SEND": "Отправить",
+    "ACTIONS": "Действия",
+    "DETAILS": "Детали",
+    "EDIT": "Редактировать",
+    "DELETE": "Удалить",
+    "ADD": "Добавить",
+    "SAVE": "Сохранить",
+    "CLOSE": "Закрыть",
+    "CANCEL": "Отмена",
+    "LOADING": "Загрузка...",
+    "SELECT": "Выбрать",
+    "ACTIVE": "Активный",
+    "INACTIVE": "Неактивный",
+    "OR": "или",
+    "NEXT": "Далее",
+    "HOME": "Главная",
+    "OPEN": "Открыть",
+    "NO_DATA": "Нет доступных данных",
+    "DOWNLOAD": "Скачать",
+    "DATE": "Дата",
+    "LOGOUT": "Выйти",
+    "SEARCH": "Поиск..."
+  },
+  "LOGIN": {
+    "TITLE": "Вход в систему",
+    "DESCRIPTION": "Пожалуйста, введите свои учетные данные для входа в систему.",
+    "USERNAME": "Имя пользователя",
+    "PASSWORD": "Пароль",
+    "LOGIN_BUTTON": "Войти",
+    "REGISTER": "Зарегистрироваться"
+  },
+  "REGISTER": {
+    "TITLE": "Регистрация",
+    "DESCRIPTION": "Пожалуйста, заполните форму регистрации.",
+    "USERNAME": "Имя пользователя",
+    "PASSWORD": "Пароль",
+    "CONFIRM_PASSWORD": "Подтвердите пароль",
+    "EMAIL": "Электронная почта",
+    "REGISTER_BUTTON": "Зарегистрироваться",
+    "LOGIN_LINK": "Уже есть аккаунт? Войти",
+    "ERRORS": {
+      "USERNAME_REQUIRED": "Имя пользователя обязательно",
+      "PASSWORD_REQUIRED": "Пароль обязателен",
+      "PASSWORD_NUMERIC": "Пароль должен содержать хотя бы одну цифру",
+      "PASSWORD_MIN_LENGTH": "Пароль должен быть не менее 8 символов",
+      "PASSWORD_MISMATCH": "Пароли не совпадают"
+    }
+  }
+}

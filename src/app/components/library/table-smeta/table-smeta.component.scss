@@ -1,0 +1,67 @@
+input {
+  border: none;
+  outline: none;
+}
+
+th,
+td {
+  padding: 0.1rem 0.5rem;
+  vertical-align: middle; /* vertical center */
+  outline: none;
+}
+
+.collapse-icon-container {
+  cursor: pointer;
+  white-space: nowrap; // Prevents text wrapping
+}
+.collapse-icon {
+  display: inline;
+}
+.razdel-row {
+  cursor: pointer;
+  background: #333;
+}
+.resources-row td {
+  color: var(--cui-success);
+}
+.edited-row td {
+  background-color: var(--cui-warning-bg-subtle); /* light yellow */
+  transition: background-color 0.3s ease;
+}
+
+/* Force text wrapping for selected column */
+.wrap-column {
+  white-space: normal !important;
+  word-wrap: break-word !important;
+}
+
+/* Ensure cells allow height growth */
+.dx-treelist .dx-data-row .wrap-column {
+  line-height: 1.2;
+}
+.dx-treelist .dx-data-row td {
+  padding: 0.1rem;
+}
+
+.row-razdel {
+  color: var(--dx-color-text);
+  font-weight: bold;
+}
+
+.row-work {
+  color: var(--cui-primary);
+}
+
+.row-resource {
+  color: var(--cui-success);
+}
+
+::ng-deep .dx-treelist .kol-merged {
+  display: block;
+  width: 100%;
+  font-weight: 600; /* optional */
+}
+
+::ng-deep .dx-treelist .empty-rashod {
+  display: none !important;
+}

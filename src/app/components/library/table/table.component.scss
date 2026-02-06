@@ -1,0 +1,56 @@
+.edit-button,
+.delete-button {
+  text-align: center;
+  cursor: pointer;
+  // color: var(--cui-body-color);
+}
+
+.delete-button:hover {
+  color: var(--cui-danger);
+}
+.edit-button:hover {
+  color: var(--cui-primary);
+}
+
+.details-button-container {
+  text-align: center;
+  margin: 0 auto;
+}
+.details-button {
+  display: flex;
+  cursor: pointer;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: var(--cui-primary);
+  mat-icon {
+    height: fit-content;
+    transition: color 0.2s ease;
+  }
+}
+.details-button:hover {
+  color: var(--cui-primary-dark);
+  mat-icon {
+    color: var(--cui-danger);
+  }
+}
+.table > :not(caption) > * > * {
+  font-size: 0.875rem;
+}
+
+::ng-deep .status-active {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  font-weight: 600;
+}
+
+::ng-deep .status-inactive {
+  background-color: #f8d7da;
+  color: #842029;
+  font-weight: 600;
+}
+::ng-deep .dx-popup-title {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+}

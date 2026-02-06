@@ -1,0 +1,234 @@
+{
+  "PAGINATION": {
+    "LAST_PAGE": "Last page"
+  },
+  "USERS": {
+    "USERS": "Users",
+    "EDIT_USER": "Edit User",
+    "ADD_USER": "Add New User",
+    "DELETE_USER_TITLE": "Delete User",
+    "DELETE_USER_CONFIRM": "Are you sure you want to delete this user?",
+    "USER_ID": "User ID",
+    "USER_CLIENT_ID": "User Client ID",
+    "USER_LOGIN": "User login",
+    "USER_PASSWORD": "User password",
+    "FIO": "FIO",
+    "PHONE": "Phone",
+    "EMAIL": "Email",
+    "ORGANIZATION": "Organization",
+    "COUNTRY": "Country",
+    "CITY": "City",
+    "STATUS": "Status",
+    "ROLE": "Role",
+    "GUID": "GUID",
+    "LAST_LOGIN": "Last login",
+    "IP_ADDRESS": "IP Address",
+    "PLACEHOLDERS": {
+      "ENTER_LOGIN": "Enter login",
+      "ENTER_NAME": "Enter name",
+      "ENTER_CLIENT_ID": "Enter client ID",
+      "ENTER_PASSWORD": "Enter password",
+      "ENTER_FIO1": "Enter FIO1",
+      "ENTER_FIO2": "Enter FIO2",
+      "ENTER_FIO3": "Enter FIO3",
+      "ENTER_PHONE": "Enter phone",
+      "ENTER_EMAIL": "Enter email",
+      "ENTER_GUID": "Enter GUID"
+    },
+    "SELECT": {
+      "ORGANIZATION": "Select an organization",
+      "COUNTRY": "Select a country",
+      "CITY": "Select a city"
+    }
+  },
+  "SELECT": {
+    "COUNTRY": "Select a country",
+    "CITY": "Select a city",
+    "ORGANIZATION": "Select an organization",
+    "USER": "Select a user",
+    "ROLE": "Select a role",
+    "OR": "or"
+  },
+  "TRANSFERS": {
+    "NOTE": "Note",
+    "TRANSFER_TYPE": "Transfer Type",
+    "TRANSFER_DATE": "Transfer Date",
+    "SENDER": "Transfer Sender",
+    "RECIPIENT": "Transfer Recipient",
+    "SEND_TRANSFER": "Send Transfer",
+    "CONFIRM_TRANSFER": "Confirm Transfer",
+    "TRANSFER_DETAILS": "Transfer Details"
+  },
+  "CONSTRUCTION": {
+    "CONSTRUCTION": "Construction",
+    "SEND": {
+      "SVOD_RESOURCE_PRICE": "Send SVOD Resource Price",
+      "SVOD_RESOURCE_PRICE_MODAL": "Send SVOD Resource Price Modal",
+      "SVOD_RESOURCE_PRICE_CONFIRM": "Are you sure you want to send the SVOD resource price?"
+    },
+    "ERRORS": {
+      "DELETE": "You cannot delete this construction.",
+      "OPEN_ONE": "You can only open one construction at a time.",
+      "ONE_TO_DELETE": "Please select one construction to delete.",
+      "ONLY_ONE_TO_DELETE": "You can only delete one construction at a time.",
+      "NO_AVAILABLE_USERS": "No available users to add.",
+      "ONE_TO_ADD": "Please select one construction to add.",
+      "ONLY_ONE_TO_ADD": "You can only add one construction at a time.",
+      "CHANGE_RESOURCE_TO_SEND": "Please change the resource before sending."
+    },
+    "ADD_USER_TO_CONSTRUCTION": "Add User to Construction",
+    "OBJECTS_SMETAS": "Objects and Estimates",
+    "SVOD_RESOURCES": "Resource Summary",
+    "CODE": "Code",
+    "NAME": "Work and Cost Name",
+    "UNIT": "Unit",
+    "QUANTITY": "Quantity",
+    "PRICE": "Price",
+    "ONE": "Per Unit",
+    "TOTAL": "Total"
+  },
+  "ROLES": {
+    "ROLES": "Roles",
+    "EDIT_ROLE": "Edit Role",
+    "ADD_ROLE": "Add New Role",
+    "DELETE_ROLE_CONFIRM": "Are you sure you want to delete this role?",
+    "ROLE_ID": "Role ID",
+    "ROLE_NAME": "Role Name",
+    "ROLE_DESCRIPTION": "Role Description",
+    "ROLE_STATUS": "Role Status",
+    "PLACEHOLDERS": {
+      "ENTER_ROLE_NAME": "Enter role name",
+      "ENTER_DESCRIPTION": "Enter description"
+    }
+  },
+  "ORGANIZATIONS": {
+    "ORGANIZATIONS": "Organizations",
+    "EDIT_ORGANIZATION": "Edit Organization",
+    "ADD_ORGANIZATION": "Add New Organization",
+    "DELETE_ORGANIZATION_CONFIRM": "Are you sure you want to delete this organization?",
+    "ORGANIZATION_ID": "Organization ID",
+    "ORGANIZATION_NAME": "Organization Name",
+    "ORGANIZATION_DESCRIPTION": "Organization Description",
+    "PLACEHOLDERS": {
+      "ENTER_ORGANIZATION_NAME": "Enter organization name",
+      "ENTER_DESCRIPTION": "Enter description"
+    }
+  },
+  "COUNTRIES": {
+    "COUNTRIES": "Countries",
+    "EDIT_COUNTRY": "Edit Country",
+    "ADD_COUNTRY": "Add New Country",
+    "DELETE_COUNTRY_TITLE": "Delete Country",
+    "DELETE_COUNTRY_CONFIRM": "Are you sure you want to delete this country?",
+    "COUNTRY_ID": "Country ID",
+    "COUNTRY_NAME": "Country Name",
+    "COUNTRY_DESCRIPTION": "Country Description",
+    "PLACEHOLDERS": {
+      "ENTER_COUNTRY_NAME": "Enter country name",
+      "ENTER_DESCRIPTION": "Enter description"
+    }
+  },
+  "CITIES": {
+    "CITIES": "Cities",
+    "EDIT_CITY": "Edit City",
+    "ADD_CITY": "Add New City",
+    "DELETE_CITY_TITLE": "Delete City",
+    "DELETE_CITY_CONFIRM": "Are you sure you want to delete this city?",
+    "CITY_ID": "City ID",
+    "CITY_NAME": "City Name",
+    "CITY_DESCRIPTION": "City Description",
+    "PLACEHOLDERS": {
+      "ENTER_CITY_NAME": "Enter city name",
+      "SELECT_COUNTRY": "Select country",
+      "ENTER_DESCRIPTION": "Enter description"
+    }
+  },
+  "UPDATES": {
+    "UPDATES": "Updates",
+    "UPDATE_ID": "Update ID",
+    "COUNTRY_ID": "Country ID"
+  },
+  "NAV": {
+    "DASHBOARD": "Dashboard",
+    "USERS_ACCESS": "Users and Access",
+    "ONLINE_USERS": "Online Users",
+    "ROLES": "Roles",
+    "OPERATIONS": "Operations",
+    "ORGANIZATIONS": "Organizations",
+    "TRANSFERS": "Transfers",
+    "INCOMING_TRANSFERS": "Incoming Transfers",
+    "OUTGOING_TRANSFERS": "Outgoing Transfers",
+    "OBJECTS": "Objects",
+    "CUSTOMER": "Customer",
+    "CONTRACTOR": "Contractor",
+    "DESIGNER": "Designer",
+    "EXPERT": "Expert",
+    "GEOGRAPHY": "Geography",
+    "COUNTRIES": "Countries",
+    "CITIES": "Cities",
+    "MONITORING": "Monitoring",
+    "LOGS": "Logs",
+    "UPDATES": "Updates",
+    "DOWNLOADS": "Downloads",
+    "DOWNLOADS_SETUP": "eStimaSetup.zip",
+    "DOWNLOADS_EXE": "eStima.zip"
+  },
+  "EXE": {
+    "DOWNLOADING": "Downloading, this may take 3 minutes...",
+    "DOWNLOAD_COMPLETED": "✅ Download completed.",
+    "DOWNLOAD_FAILED": "❌ Download failed.",
+    "DOWNLOAD_CANCELED": "❌ Download canceled."
+  },
+
+  "COMMON": {
+    "NAME": "Name",
+    "DESCRIPTION": "Description",
+    "STATUS": "Status",
+    "SEND": "Send",
+    "DETAILS": "Details",
+    "EDIT": "Edit",
+    "ACTIONS": "Actions",
+    "DELETE": "Delete",
+    "ADD": "Add",
+    "SAVE": "Save",
+    "CLOSE": "Close",
+    "CANCEL": "Cancel",
+    "LOADING": "Loading...",
+    "SELECT": "Select",
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+    "OR": "or",
+    "NEXT": "Next",
+    "HOME": "Home",
+    "OPEN": "Open",
+    "NO_DATA": "No data available",
+    "DOWNLOAD": "Download",
+    "DATE": "Date",
+    "LOGOUT": "Logout",
+    "SEARCH": "Search..."
+  },
+  "LOGIN": {
+    "TITLE": "Login",
+    "DESCRIPTION": "Please enter your login and password to access the system.",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "LOGIN_BUTTON": "Login",
+    "REGISTER": "Register"
+  },
+  "REGISTER": {
+    "TITLE": "Register",
+    "DESCRIPTION": "Please fill in the form to create a new account.",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "EMAIL": "Email",
+    "REGISTER_BUTTON": "Register",
+    "ERRORS": {
+      "PASSWORD_MISMATCH": "Passwords do not match",
+      "USERNAME_REQUIRED": "Username is required",
+      "PASSWORD_NUMERIC": "Password must contain at least one digit",
+      "PASSWORD_MIN_LENGTH": "Password must be at least 8 characters long",
+      "PASSWORD_REQUIRED": "Password is required"
+    }
+  }
+}

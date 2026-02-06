@@ -1,0 +1,170 @@
+/* Style for the tree container */
+
+.construction-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--cui-body-bg);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Leaf Node Styling */
+.tree-node-leaf {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.tree-node-leaf:hover {
+  background-color: #f1f1f1;
+}
+
+.node-text {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.mat-tree {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  color: #343a40;
+
+  .mat-tree-node,
+  .mat-nested-tree-node {
+    padding: 6px 12px;
+    border-radius: 8px;
+    margin-bottom: 2px;
+    transition: background-color 0.1ms ease-in-out;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      background-color: var(--cui-secondary-bg); // light blue hover
+    }
+  }
+
+  .mat-tree-node.selected,
+  .mat-nested-tree-node.selected {
+    background-color: #bbdefb;
+    font-weight: 500;
+  }
+
+  .tree-node {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  c-icon {
+    margin-right: 6px;
+    color: #607d8b;
+  }
+}
+
+/* Icon Styling */
+
+// Optional: Style tab headers more cleanly
+.tab-label-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 6px;
+
+  .tab-title {
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .tab-close {
+    color: #999;
+
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--cui-danger);
+    }
+    mat-icon {
+      font-size: 1.2rem;
+      height: fit-content;
+    }
+  }
+}
+
+// Optional: style the default "Smeta" tab label
+.tab-label {
+  .tab-title {
+    font-weight: bold;
+    font-size: 15px;
+  }
+}
+
+/* Tree Padding */
+mat-tree-node {
+  padding: 0;
+}
+
+.tab-label-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.tab-title {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-close {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+}
+
+.ribbon-tab-group {
+  background: #f1f1f1;
+  border-bottom: 1px solid #ccc;
+
+  .mat-tab-labels {
+    background-color: #e0e0e0;
+    padding: 0 16px;
+  }
+
+  .ribbon-tab-content {
+    display: flex;
+    gap: 12px;
+    padding: 10px 20px;
+    background-color: #fdfdfd;
+    border-bottom: 1px solid #d0d0d0;
+  }
+}
+
+// ::ng-deep .dx-treelist-rowsview .dx-row > td.dx-treelist-cell-expandable .dx-treelist-collapsed::before{
+//   content: "\1F4C1"; /* Unicode for 'folder' */
+//   font-family: "dxicons"; /* DevExtreme icon font */
+//   font-size: 16px; /* optional */
+//   color: #ff6600; /* optional color */
+
+// }
+// ::ng-deep .dx-treelist-rowsview .dx-row > td.dx-treelist-cell-expandable .dx-treelist-expanded::before {
+//   content: "\1F4C2"; /* Unicode for 'open folder' */
+//   font-family: "dxicons"; /* DevExtreme icon font */
+//   font-size: 16px; /* optional */
+//   color: #ff6600; /* optional color */
+// }
+
+/* CLOSED folder */

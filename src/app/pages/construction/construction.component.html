@@ -1,0 +1,193 @@
+<div *ngIf="errorMessage()" class="alert alert-danger" role="alert">
+  {{ errorMessage() }}
+</div>
+<app-ribbon
+  [tabs]="ribbonTabs"
+  [activeKey]="activeTab"
+  (activeKeyChange)="activeTab = $event"
+  (action)="handleRibbonAction($event)"
+></app-ribbon>
+<app-shared-modal
+  [(visible)]="isSendTransferModalOpen"
+  [title]="'TRANSFERS.SEND_TRANSFER' | translate"
+  [backdrop]="'static'"
+  [showFooter]="false"
+  (closed)="sendTransferForm.reset()"
+>
+  <app-error-toast></app-error-toast>
+
+  <form [formGroup]="sendTransferForm" (ngSubmit)="onSendTransferFormSubmit()">
+    <!-- your form fields... -->
+
+    <div class="d-flex justify-content-end gap-2">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="
+          !sendTransferForm.get('user_id_recipient')?.value &&
+          !sendTransferForm.get('user_client_id')?.value
+        "
+      >
+        {{ "COMMON.NEXT" | translate }}
+      </button>
+
+      <!-- ✅ close modal properly -->
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="closeSendTransferModal()"
+      >
+        {{ "COMMON.CANCEL" | translate }}
+      </button>
+    </div>
+  </form>
+</app-shared-modal>
+
+<!-- <app-shared-modal
+  [modalId]="'confirmTransferModal'"
+  modalTitle="{{ 'TRANSFERS.CONFIRM_TRANSFER' | translate }}"
+>
+  <div class="confirmation-content p-3">
+    <h5 class="mb-3 text-primary">Transfer Summary</h5>
+    <div class="mb-3">
+      <p class="mb-1 fw-semibold text-muted">Recipient</p>
+      <div class="bg-light rounded px-3 py-2 border">
+        {{ recipient()?.fio_1 || "N/A" }}
+        {{ recipient()?.fio_2 || "N/A" }}
+      </div>
+    </div>
+    <div class="mb-3">
+      <p class="mb-1 fw-semibold text-muted">Selected Transfers</p>
+      <ul class="list-group list-group-flush">
+        <li
+          class="list-group-item px-0 py-1"
+          *ngFor="let transfer of selectedTransfers()"
+        >
+          <span class="fw-medium">{{ transfer.note }}</span>
+          <small class="text-muted ms-1">(ID: {{ transfer.id }})</small>
+        </li>
+      </ul>
+    </div>
+    <p class="mt-4">Are you sure you want to send these transfers?</p>
+    <div class="d-flex justify-content-end gap-2 mt-3">
+      <button
+        class="btn btn-primary"
+        [disabled]="loadingService.isLoading | async"
+        (click)="confirmSendTransfer()"
+      >
+        <svg cIcon name="cilPaperPlane"></svg> Send
+      </button>
+      <button
+        class="btn btn-outline-secondary"
+        [cModalToggle]="'confirmTransferModal'"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</app-shared-modal> -->
+
+<div class="construction-list" *ngIf="!currentConstructionId">
+  <div class="construction-list-container">
+    <app-table
+      [columns]="transferColumns"
+      [data]="constructions()"
+      [actions]="false"
+      [showEditDetails]="true"
+      (editDetailsCallback)="editTransfer($event)"
+      [editDetailsText]="'Edit'"
+      [showSelectAll]="true"
+      [selectable]="true"
+      [selectionChange]="onTransferSelect"
+      [selectedItems]="selectedTransfers()"
+    ></app-table>
+  </div>
+</div>
+
+<div *ngIf="currentConstructionId">
+  <!-- <app-page-header
+    [title]="selectedConstruction().name"
+    [buttonLabel]="'Back to List'"
+    (buttonClick)="onBackToList()"
+  ></app-page-header> -->
+</div>
+
+<div class="construction-container" *ngIf="currentConstructionId">
+  <div>
+    <dx-sortable
+      [data]="tabs()"
+      itemOrientation="horizontal"
+      dragDirection="horizontal"
+      [filter]="'.smeta-tab'"
+      [allowDropInsideItem]="false"
+      (onReorder)="onTabReorder($event)"
+    >
+      <dx-tab-panel
+        [dataSource]="tabs()"
+        [selectedIndex]="selectedIndex()"
+        itemTitleTemplate="title"
+        itemTemplate="item"
+        [deferRendering]="false"
+        [showNavButtons]="true"
+        [repaintChangesOnly]="true"
+      >
+        <!-- TAB TITLE -->
+        <div *dxTemplate="let tab of 'title'">
+          <!-- FIXED TAB -->
+          <div *ngIf="tab.type === 'fixed'" class="fixed-tab">
+            {{ tab.title | translate }}
+          </div>
+
+          <!-- SMETA TAB -->
+          <div
+            *ngIf="tab.type === 'smeta'"
+            class="smeta-tab d-flex align-items-center justify-content-between"
+          >
+            <span>{{ tab.title }}</span>
+            <i class="dx-icon dx-icon-close" (click)="removeTab(tab)"></i>
+          </div>
+        </div>
+
+        <div *dxTemplate="let tab of 'item'">
+          <!-- TAB 0 : OBJECTS & SMETAS -->
+          <dx-tree-list
+            *ngIf="tab.id === 'objects'"
+            [dataSource]="objectsTreeData()"
+            keyExpr="id"
+            parentIdExpr="parent_id"
+            hasItemsExpr="hasItems"
+            [showBorders]="true"
+            [height]="600"
+            (onRowDblClick)="onRowDblClick($event)"
+            [showRowLines]="true"
+            [hoverStateEnabled]="true"
+            [focusedRowEnabled]="true"
+          >
+            <dxi-tree-list-column
+              dataField="name"
+              caption="Name"
+            ></dxi-tree-list-column>
+          </dx-tree-list>
+
+          <!-- TAB 1 : SVOD RESOURCES -->
+          <app-table-smeta
+            *ngIf="tab.id === 'svod'"
+            [data]="svod_resources()"
+            [svod_resources]="true"
+            [constructionId]="currentConstructionId"
+            (changedResources)="onChangedSvodResources($event)"
+          ></app-table-smeta>
+
+          <!-- DYNAMIC SMETA TABS -->
+          <app-table-smeta
+            *ngIf="tab.type === 'smeta'"
+            [data]="tab.data?.razdels || []"
+            [readonly]="readonly()"
+            [constructionId]="currentConstructionId"
+            (changedResources)="onChangedSvodResources($event)"
+          ></app-table-smeta>
+        </div>
+      </dx-tab-panel>
+    </dx-sortable>
+  </div>
+</div>

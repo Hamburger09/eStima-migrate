@@ -1,0 +1,13 @@
+<div class="view-wrapper list-page crm-contact-list">
+  <app-table
+    [columns]="countryColumns"
+    [data]="countries()"
+    [title]="'USERS.USERS'"
+    [actions]="true"
+    (rowInserted)="onCountryInserted($event)"
+    (rowUpdated)="onCountryUpdated($event)"
+    (rowRemoved)="onCountryRemoved($event)"
+    [showDetails]="true"
+    [showDetailsIcon]="'download'"
+  ></app-table>
+</div>

@@ -1,0 +1,22 @@
+<div *ngIf="!toast">
+  <div
+    *ngIf="errorService.error$ | async as error"
+    class="mb-3 alert alert-danger alert-dismissible fade show"
+  >
+    {{ error }}
+  </div>
+</div>
+
+<dx-toast
+  [visible]="!!(errorService.error$ | async) && toast"
+  [type]="'error'"
+  [message]="errorService.error$ | async"
+  [displayTime]="5000"
+  maxWidth="300"
+  [position]="{
+    at: { x: 'center', y: 'top' },
+    my: { x: 'center', y: 'top' },
+    offset: '0 40'
+  }"
+>
+</dx-toast>

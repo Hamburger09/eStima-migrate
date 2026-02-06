@@ -1,0 +1,18 @@
+<!-- <app-page-header
+i18n
+  title="{{'USERS.USERS' | translate}}"
+></app-page-header> -->
+
+<div class="view-wrapper list-page crm-contact-list">
+  <app-table
+    [columns]="cityColumns"
+    [data]="cities()"
+    [title]="'USERS.USERS'"
+    [actions]="true"
+    (rowInserted)="onCityInserted($event)"
+    (rowUpdated)="onCityUpdated($event)"
+    (rowRemoved)="onCityRemoved($event)"
+    [showDetails]="true"
+    [showDetailsIcon]="'download'"
+  ></app-table>
+</div>

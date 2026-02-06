@@ -1,0 +1,56 @@
+<!-- <app-page-header title="Logs">
+  <form action="" selector>
+    <div class="form-group mb-2">
+      <label for="search" class="form-label">Search</label>
+      <input
+        type="text"
+        class="form-control form-input"
+        id="search"
+        placeholder="Enter search term"
+      />
+    </div>
+    <div class="form-group mb-2">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        class="form-control form-input"
+        id="description"
+        placeholder="Enter description"
+      ></textarea>
+    </div>
+  </form>
+</app-page-header> -->
+
+<app-filter
+  [filters]="filterOptions"
+  (onFilter)="submitFilters($event)"
+  (onReset)="onReset()"
+></app-filter>
+
+<!-- Your table goes below -->
+
+<app-table
+  [columns]="logColumns"
+  [data]="logs()"
+  [itemsPerPage]="itemsPerPage()"
+  [currentPage]="currentPage()"
+  [actions]="false"
+></app-table>
+
+<!-- <mat-paginator
+  [length]="totalPages()"
+  [pageSize]="itemsPerPage()"
+  [pageSizeOptions]="[5, 10, 20, 100]"
+  (page)="onPageChange($event)"
+  [showFirstLastButtons]="true"
+  aria-label="Select page"
+>
+</mat-paginator> -->
+
+<app-smart-pagination
+  [totalPages]="totalPages()"
+  [currentPage]="currentPage()"
+  [itemsPerPage]="itemsPerPage()"
+  [sizeOptions]="[5, 10, 20, 100]"
+  [maxVisiblePages]="5"
+  (pageChange)="onPageChange($event)"
+></app-smart-pagination>

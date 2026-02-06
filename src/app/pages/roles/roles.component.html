@@ -1,0 +1,11 @@
+<div class="view-wrapper list-page crm-contact-list">
+  <app-table
+    [columns]="roleColumns"
+    [data]="roles()"
+    [title]="'USERS.USERS'"
+    [actions]="true"
+    (rowInserted)="onRoleInserted($event)"
+    (rowUpdated)="onRoleUpdated($event)"
+    (rowRemoved)="onRoleRemoved($event)"
+  ></app-table>
+</div>

@@ -1,0 +1,57 @@
+<header class="app-header">
+  <dx-toolbar class="header-toolbar">
+    <!-- Left: title -->
+    <dxi-item
+      location="before"
+      cssClass="header-title px-3"
+      *ngIf="title"
+      [text]="title"
+    >
+    </dxi-item>
+
+    <!-- Center spacer -->
+    <dxi-item location="center">
+      <div class="toolbar-spacer"></div>
+    </dxi-item>
+
+    <!-- Search -->
+    <dxi-item
+      location="after"
+      widget="dxTextBox"
+      cssClass="global-search-box"
+      [options]="{
+        stylingMode: 'filled',
+        mode: 'search',
+        placeholder: ('COMMON.SEARCH' | translate),
+        width: 220
+      }"
+    ></dxi-item>
+
+    <!-- Language switcher -->
+    <dxi-item location="after" cssClass="lang-switcher" locateInMenu="auto">
+      <div *dxTemplate>
+        <dx-select-box
+          [items]="languages"
+          valueExpr="code"
+          displayExpr="label"
+          [value]="currentLang"
+          [width]="110"
+          stylingMode="outlined"
+          (onValueChanged)="changeLang($event.value)"
+        ></dx-select-box>
+      </div>
+    </dxi-item>
+
+    <!-- Theme -->
+    <dxi-item location="after" locateInMenu="never">
+      <div *dxTemplate>
+        <theme-switcher></theme-switcher>
+      </div>
+    </dxi-item>
+
+    <!-- Notifications -->
+    <!-- <dxi-item location="after" locateInMenu="never">
+      
+    </dxi-item> -->
+  </dx-toolbar>
+</header>

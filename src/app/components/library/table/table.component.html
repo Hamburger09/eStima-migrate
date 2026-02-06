@@ -1,0 +1,169 @@
+<div class="view-wrapper list-page">
+  <dx-data-grid
+    class="grid theme-dependent"
+    noDataText=""
+    height="100%"
+    [dataSource]="data"
+    [allowColumnReordering]="true"
+    [focusedRowEnabled]="true"
+    [showBorders]="true"
+    [keyExpr]="'id'"
+    [rowAlternationEnabled]="rowAlternationEnabled"
+    [showColumnLines]="showColumnLines"
+    [selectedRowKeys]="selectedRowKeys"
+    (onSelectionChanged)="onSelectionChanged($event)"
+    (onCellPrepared)="onCellPrepared($event)"
+    (onRowPrepared)="onRowPrepared($event)"
+    (onEditorPreparing)="onEditorPreparing($event)"
+    (onRowInserting)="onRowInserting($event)"
+    (onRowUpdating)="onRowUpdating($event)"
+    (onRowRemoving)="onRowRemoving($event)"
+    (onInitNewRow)="onInitNewRow($event)"
+    (onEditingStart)="onEditingStart($event)"
+    (onExporting)="onExporting($event)"
+  >
+    <dxo-load-panel [showPane]="false"></dxo-load-panel>
+    <dxo-scrolling mode="virtual"></dxo-scrolling>
+
+    <dxo-selection
+      *ngIf="selectable"
+      selectAllMode="allPages"
+      showCheckBoxesMode="always"
+      mode="multiple"
+    ></dxo-selection>
+
+    <dxo-sorting mode="multiple"></dxo-sorting>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+
+    <dxo-search-panel
+      [visible]="searchEnabled"
+      [placeholder]="searchPlaceholder"
+    ></dxo-search-panel>
+
+    <dxo-export
+      *ngIf="exportEnabled"
+      [enabled]="true"
+      [allowExportSelectedData]="true"
+      [formats]="['xlsx', 'pdf']"
+    ></dxo-export>
+
+    <!-- Toolbar -->
+    <dxo-toolbar>
+      <!-- Title -->
+      <dxi-item location="before">
+        <div class="grid-header">{{ title | translate }}</div>
+      </dxi-item>
+
+      <!-- Custom Filter Dropdown (Optional) -->
+      <dxi-item
+        location="before"
+        locateInMenu="auto"
+        *ngIf="filterList && filterList.length > 0"
+      >
+        <dx-drop-down-button
+          stylingMode="text"
+          [useSelectMode]="true"
+          [items]="filterList"
+          [dropDownOptions]="{ width: 'auto' }"
+          [selectedItemKey]="filterList[0]"
+          (onSelectionChanged)="onFilterChanged($event)"
+        ></dx-drop-down-button>
+      </dxi-item>
+
+      <!-- Add Button -->
+      <dxi-item location="after" locateInMenu="auto" *ngIf="actions">
+        <dx-button
+          [text]="addButtonText"
+          icon="plus"
+          type="default"
+          stylingMode="contained"
+          (onClick)="onAddClick()"
+        ></dx-button>
+      </dxi-item>
+
+      <!-- Refresh Button -->
+      <dxi-item
+        location="after"
+        locateInMenu="auto"
+        showText="inMenu"
+        widget="dxButton"
+        [options]="{
+          text: 'Refresh',
+          icon: 'refresh',
+          onClick: onRefresh,
+          stylingMode: 'text'
+        }"
+      ></dxi-item>
+
+      <dxi-item location="after" locateInMenu="auto">
+        <div class="separator"></div>
+      </dxi-item>
+
+      <!-- Export Button -->
+      <dxi-item name="exportButton" *ngIf="exportEnabled"></dxi-item>
+
+      <dxi-item location="after" locateInMenu="auto" *ngIf="exportEnabled">
+        <div class="separator"></div>
+      </dxi-item>
+
+      <!-- Column Chooser Button -->
+      <dxi-item name="columnChooserButton" locateInMenu="auto"></dxi-item>
+
+      <!-- Search Panel -->
+      <dxi-item
+        name="searchPanel"
+        locateInMenu="auto"
+        *ngIf="searchEnabled"
+      ></dxi-item>
+    </dxo-toolbar>
+
+    <!-- Dynamic Columns -->
+    <dxi-column
+      *ngFor="let col of columns"
+      [dataField]="col.key"
+      [caption]="col.label | translate"
+      [lookup]="col.lookup"
+      [setCellValue]="col.setCellValue"
+      [validationRules]="col.required ? [{ type: 'required' }] : []"
+      [calculateDisplayValue]="
+        col.valueGetter ||
+        col.displayGetter ||
+        col.calculateDisplayValue ||
+        null
+      "
+      [hidingPriority]="0"
+      [minWidth]="100"
+      [cellTemplate]="col.cellTemplate"
+    >
+    </dxi-column>
+
+    <!-- Command column for buttons -->
+    <dxi-column
+      type="buttons"
+      [visible]="actions || showDetails || showEditDetails"
+      [width]="110"
+    >
+      <dxi-button name="edit" icon="edit" *ngIf="actions"></dxi-button>
+      <dxi-button name="delete" icon="trash" *ngIf="actions"></dxi-button>
+      <dxi-button
+        icon="edit"
+        *ngIf="showEditDetails"
+        [onClick]="editDetailsHandler"
+      ></dxi-button>
+      <dxi-button
+        [icon]="showDetailsIcon"
+        *ngIf="showDetails"
+        [onClick]="detailsHandler"
+      ></dxi-button>
+    </dxi-column>
+
+    <!-- Custom Templates (can be projected from parent) -->
+    <ng-content></ng-content>
+  </dx-data-grid>
+
+  <!-- Error Toast -->
+  <div class="mb-2">
+    <app-error-toast [toast]="true"></app-error-toast>
+  </div>
+</div>

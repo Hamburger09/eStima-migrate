@@ -1,0 +1,126 @@
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+  HttpResponse,
+} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {
+  catchError,
+  finalize,
+  Observable,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
+import { LoadingService } from './loading.service';
+import { ErrorService } from './error.service';
+import { AuthService } from './auth.service';
+import { MessageService } from './message.service';
+import { environment } from 'src/environments/environment';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class InterceptorService implements HttpInterceptor {
+  constructor(
+    private loadingService: LoadingService,
+    private errorService: ErrorService,
+    private authService: AuthService,
+    private messageService: MessageService
+  ) {}
+
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    this.loadingService.startHttpLoading();
+
+    // ✅ Define what "our API" means
+    // If you use absolute URLs: environment.apiUrl = "http://localhost:8080/api"
+    const isOurApiRequest =
+      req.url.startsWith(environment.apiUrl) || req.url.startsWith('/api'); // keep this if you use proxy + relative URLs
+
+    const isRefreshCall = req.url.includes('/refresh-token');
+
+    let modifiedReq = req;
+
+    // ✅ Add Authorization ONLY for our API, and not for refresh-token call
+    const token = this.authService.getTokenFromStorage();
+    if (isOurApiRequest && token && !isRefreshCall) {
+      modifiedReq = req.clone({
+        setHeaders: { Authorization: `Bearer ${token}` },
+      });
+    }
+
+    return next.handle(modifiedReq).pipe(
+      tap((event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          const body = event.body;
+          if (body?.success && body?.message) {
+            this.messageService.showSuccess(body.message);
+          }
+        }
+      }),
+
+      catchError((error: HttpErrorResponse) => {
+        // ✅ Don't run auth/refresh logic for external calls (DevExtreme demo API etc.)
+        if (!isOurApiRequest) {
+          return throwError(() => error);
+        }
+
+        const isJwtExpired = error.status === 401;
+
+        // ⛔ If refresh itself failed -> logout
+        if (isRefreshCall) {
+          this.authService.logout().subscribe();
+          return throwError(() => error);
+        }
+
+        // 🔁 Try refresh on 401 only for our API requests
+        if (isJwtExpired) {
+          return this.authService.refreshToken().pipe(
+            switchMap((newToken: string | null) => {
+              if (!newToken) {
+                this.authService.logout().subscribe();
+                return throwError(() => error);
+              }
+
+              // ✅ Retry original request with new token
+              const retriedReq = req.clone({
+                setHeaders: { Authorization: `Bearer ${newToken}` },
+              });
+
+              return next.handle(retriedReq);
+            }),
+            catchError((refreshError) => {
+              this.authService.logout().subscribe();
+              return throwError(() => refreshError);
+            })
+          );
+        }
+
+        // 📛 Other errors for our API
+        let message = 'An unknown error occurred!';
+        if (error.error instanceof ErrorEvent) {
+          message = `Error: ${error.error.message}`;
+        } else {
+          message =
+            error.error?.error ||
+            error.error?.message ||
+            error.message ||
+            message;
+        }
+
+        this.errorService.showError(message);
+        return throwError(() => error);
+      }),
+
+      finalize(() => {
+        this.loadingService.stopHttpLoading();
+      })
+    );
+  }
+}

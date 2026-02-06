@@ -1,0 +1,17 @@
+@use "../../../../variables.scss" as *;
+
+.login-form {
+  ::ng-deep .form-text {
+    color: var(--base-text-color-alpha);
+  }
+}
+
+.reset-link {
+  text-align: center;
+  font-style: normal;
+  margin: 6px 0 50px 0;
+
+  a {
+    cursor: pointer;
+  }
+}
