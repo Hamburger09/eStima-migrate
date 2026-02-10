@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,6 +15,7 @@ import { ErrorService } from '../../../services/error.service';
 import { ErrorToastComponent } from 'src/app/components/library/error-toast/error-toast.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { DxDataGridComponent } from 'devextreme-angular/ui/data-grid';
 
 import {
   DxDropDownButtonModule,
@@ -68,6 +75,8 @@ export class TableComponent {
   @Output() rowRemoved = new EventEmitter<any>();
   @Output() rowUpdated = new EventEmitter<any>();
   @Output() refresh = new EventEmitter<void>();
+
+  @ViewChild('grid', { static: false }) grid!: DxDataGridComponent;
 
   myId: number | null = null; // User ID from AuthService
 
@@ -166,6 +175,9 @@ export class TableComponent {
   }
 
   onAddClick(): void {
+    // open DevExtreme popup editor
+    this.grid?.instance?.addRow();
+    // optional: also emit
     this.addClick.emit();
   }
 

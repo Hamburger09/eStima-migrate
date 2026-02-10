@@ -28,17 +28,20 @@
     ></dxi-item>
 
     <!-- Language switcher -->
-    <dxi-item location="after" cssClass="lang-switcher" locateInMenu="auto">
+    <dxi-item location="after" locateInMenu="auto">
       <div *dxTemplate>
-        <dx-select-box
-          [items]="languages"
-          valueExpr="code"
-          displayExpr="label"
-          [value]="currentLang"
-          [width]="110"
-          stylingMode="outlined"
-          (onValueChanged)="changeLang($event.value)"
-        ></dx-select-box>
+        <dx-drop-down-button
+          [text]="`${selectedLanguage?.text}`"
+          icon="globe"
+          [items]="languageOptions"
+          keyExpr="id"
+          displayExpr="text"
+          [useSelectMode]="true"
+          [selectedItemKey]="currentLang"
+          (onSelectionChanged)="onLanguageChange($event)"
+          stylingMode="text"
+        >
+        </dx-drop-down-button>
       </div>
     </dxi-item>
 

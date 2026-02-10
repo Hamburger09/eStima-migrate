@@ -1,5 +1,6 @@
 <header>
   <dx-toolbar class="header-toolbar">
+    <!-- Menu Toggle Button -->
     <dxi-item
       *ngIf="menuToggleEnabled"
       location="before"
@@ -12,6 +13,8 @@
       }"
     >
     </dxi-item>
+
+    <!-- Title -->
     <dxi-item
       location="before"
       cssClass="header-title"
@@ -20,6 +23,7 @@
     >
     </dxi-item>
 
+    <!-- Search Box -->
     <dxi-item
       location="after"
       widget="dxTextBox"
@@ -33,40 +37,56 @@
       }"
     >
     </dxi-item>
+
+    <!-- Theme Switcher -->
     <dxi-item location="after" locateInMenu="never">
       <div *dxTemplate>
         <theme-switcher></theme-switcher>
       </div>
     </dxi-item>
 
+    <!-- Language Dropdown -->
+    <dxi-item location="after" locateInMenu="auto">
+      <div *dxTemplate>
+        <dx-drop-down-button
+          [text]="`${selectedLanguage?.text}`"
+          icon="globe"
+          [items]="languageOptions"
+          keyExpr="id"
+          displayExpr="text"
+          [useSelectMode]="true"
+          [selectedItemKey]="currentLanguage"
+          (onSelectionChanged)="onLanguageChange($event)"
+          stylingMode="text"
+        >
+        </dx-drop-down-button>
+      </div>
+    </dxi-item>
+
+    <!-- Notifications -->
     <dxi-item location="after">
       <div *dxTemplate>
         <div class="messages">
-          <dx-button
-            icon="belloutline"
-            stylingMode="text"
-          >
-          </dx-button>
-          <div class="dx-badge"> 4 </div>
+          <dx-button icon="belloutline" stylingMode="text"> </dx-button>
+          <div class="dx-badge">4</div>
         </div>
       </div>
     </dxi-item>
 
-    <dxi-item location="after" locateInMenu="auto" menuItemTemplate="menuItem">
-      <div *dxTemplate="let data of 'item'">
-        <user-panel
-          [user]="user"
-          [menuItems]="userMenuItems"
-          menuMode="context"
-        ></user-panel>
+    <!-- Profile Dropdown -->
+    <dxi-item location="after" locateInMenu="auto">
+      <div *dxTemplate>
+        <dx-drop-down-button
+          [text]="userClientId || 'User'"
+          icon="user"
+          [items]="profileMenuItems"
+          displayExpr="text"
+          keyExpr="text"
+          (onItemClick)="onProfileMenuClick($event)"
+          stylingMode="text"
+        >
+        </dx-drop-down-button>
       </div>
     </dxi-item>
-    <div *dxTemplate="let data of 'menuItem'">
-      <user-panel
-        [user]="user"
-        [menuItems]="userMenuItems"
-        menuMode="list"
-      ></user-panel>
-    </div>
   </dx-toolbar>
 </header>

@@ -7,8 +7,7 @@ import { LanguageService } from 'src/app/services/language.service';
 import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { ThemeSwitcherComponent } from 'src/app/components/library/theme-switcher/theme-switcher.component';
-import { DxSelectBoxModule } from 'devextreme-angular/ui/select-box';
-
+import { DxDropDownButtonModule } from 'devextreme-angular/ui/drop-down-button';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -17,27 +16,36 @@ import { DxSelectBoxModule } from 'devextreme-angular/ui/select-box';
     DxToolbarModule,
     DxButtonModule,
     ThemeSwitcherComponent,
-    DxSelectBoxModule,
+    DxDropDownButtonModule,
   ],
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
+  private languageService = inject(LanguageService);
   readonly colorMode = [];
   menuOpened!: boolean;
   title = 'eStima';
 
-  languages = [
-    { code: 'en', label: 'EN' },
-    { code: 'ru', label: 'RU' },
-    { code: 'uz', label: 'UZ' },
+  // Language options
+  languageOptions = [
+    { id: 'en', text: '🇬🇧 English', icon: '🇬🇧' },
+    { id: 'ru', text: '🇷🇺 Русский', icon: '🇷🇺' },
+    { id: 'uz', text: "🇺🇿 O'zbek", icon: '🇺🇿' },
   ];
-  currentLang =
-    computed(() => this.languageService.getCurrentLanguage()) || 'en';
+  currentLang = 'en';
 
-  constructor(private languageService: LanguageService) {}
-
-  changeLang(lang: string): void {
-    this.currentLang = lang;
-    this.languageService.setLanguage(lang);
+  constructor() {
+    // Get current language
+    this.languageService.getCurrentLanguage().subscribe((lang) => {
+      this.currentLang = lang;
+    });
+  }
+  onLanguageChange(e: any) {
+    const selectedLang = e.item.id;
+    this.languageService.setLanguage(selectedLang);
+    this.currentLang = selectedLang;
+  }
+  get selectedLanguage() {
+    return this.languageOptions.find((lang) => lang.id === this.currentLang);
   }
 }

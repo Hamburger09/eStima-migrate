@@ -14,7 +14,11 @@ import { Router, RouterModule, NavigationEnd, Event } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { ScreenService, AppInfoService } from '../../services';
-import { SideNavigationMenuComponent, AppHeaderComponent, AppFooterComponent } from '../../components';
+import {
+  SideNavigationMenuComponent,
+  AppHeaderComponent,
+  AppFooterComponent,
+} from '../../components';
 
 @Component({
   selector: 'app-side-nav-outer-toolbar',
@@ -26,11 +30,12 @@ import { SideNavigationMenuComponent, AppHeaderComponent, AppFooterComponent } f
     DxDrawerModule,
     AppHeaderComponent,
     CommonModule,
-    AppFooterComponent
+    AppFooterComponent,
   ],
 })
 export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
-  @ViewChild(DxScrollViewComponent, { static: true }) scrollView!: DxScrollViewComponent;
+  @ViewChild(DxScrollViewComponent, { static: true })
+  scrollView!: DxScrollViewComponent;
 
   @Input()
   title!: string;
@@ -70,7 +75,9 @@ export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.menuOpened = this.screen.sizes['screen-large'];
 
-    this.screenSubscription = this.screen.changed.subscribe(() => this.updateDrawer());
+    this.screenSubscription = this.screen.changed.subscribe(() =>
+      this.updateDrawer()
+    );
 
     this.updateDrawer();
   }
