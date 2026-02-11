@@ -6,6 +6,7 @@ export interface TableColumn {
   dataType?: string; // string, number, boolean, date, etc.
   editorType?: string; // dxTextBox, dxSelectBox, dxSwitch, etc.
   editorOptions?: any;
+  width?: number | string; // e.g. 100, '50%', etc.
   lookup?: {
     dataSource: any[] | ((options?: any) => any[]);
     valueExpr: string;

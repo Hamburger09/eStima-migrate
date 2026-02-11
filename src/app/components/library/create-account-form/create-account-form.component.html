@@ -1,103 +1,324 @@
-<form class="create-account-form auth-form" (submit)="onSubmit($event)">
-  <dx-form
-    labelLocation="top"
-    [formData]="formData"
-    [showColonAfterLabel]="true"
-    [disabled]="loading"
+<!-- DevExtreme Registration with Stepper and MultiView -->
+<div class="register-container">
+  <dx-stepper
+    [focusStateEnabled]="!isStepperReadonly"
+    [class.readonly]="isStepperReadonly"
+    [(selectedIndex)]="selectedIndex"
+    (onSelectionChanging)="onSelectionChanging($event)"
   >
-    <dxi-item
-      dataField="email"
-      editorType="dxTextBox"
-      [editorOptions]="{
-        placeholder: 'Email',
-        stylingMode: 'filled',
-        mode: 'email',
-        value: defaultAuthData?.data?.email
-      }"
-    >
-      <dxi-validation-rule
-        type="required"
-        message="Email is required"
-      ></dxi-validation-rule>
-      <dxi-validation-rule
-        type="email"
-        message="Email is invalid"
-      ></dxi-validation-rule>
-      <dxo-label text="Email"></dxo-label>
-    </dxi-item>
+    @for (step of steps; track step) {
+    <dxi-stepper-item
+      [label]="step.label"
+      [icon]="step.icon"
+      [isValid]="step.isValid"
+    ></dxi-stepper-item>
+    }
+  </dx-stepper>
 
-    <dxi-item
-      dataField="password"
-      editorType="dxTextBox"
-      [editorOptions]="{
-        stylingMode: 'filled',
-        value: 'password',
-        mode: 'password'
-      }"
+  <div class="content">
+    <dx-multi-view
+      [(selectedIndex)]="selectedIndex"
+      [animationEnabled]="true"
+      [focusStateEnabled]="false"
+      [swipeEnabled]="false"
+      [height]="'auto'"
     >
-      <dxi-validation-rule
-        type="required"
-        message="Password is required"
-      ></dxi-validation-rule>
-      <dxo-label text="Password"></dxo-label>
-    </dxi-item>
+      <!-- Step 1: Account Information -->
+      <dxi-multi-view-item>
+        <div *dxTemplate>
+          <dx-form
+            [formData]="accountFormData"
+            [validationGroup]="validationGroups[0]"
+            labelLocation="top"
+            [showColonAfterLabel]="false"
+          >
+            <dxi-item itemType="group">
+              <dxi-item>
+                <div class="form-header">
+                  <h1>{{ "REGISTER.TITLE" | translate }}</h1>
+                </div>
+              </dxi-item>
+            </dxi-item>
 
-    <dxi-item
-      dataField="confirmedPassword"
-      editorType="dxTextBox"
-      [editorOptions]="{
-        stylingMode: 'filled',
-        value: 'password',
-        mode: 'password'
-      }"
-    >
-      <dxi-validation-rule
-        type="required"
-        message="Password is required"
-      ></dxi-validation-rule>
-      <dxi-validation-rule
-        type="custom"
-        message="Passwords do not match"
-        [validationCallback]="confirmPassword"
-      >
-      </dxi-validation-rule>
-      <dxo-label text="Confirm Password"></dxo-label>
-    </dxi-item>
+            <app-error-toast></app-error-toast>
 
-    <dxi-item>
-      <div class="policy-info">
-        By creating an account, you agree to the
-        <a [routerLink]="redirectLink">Terms of Service</a> and
-        <a [routerLink]="redirectLink">Privacy Policy</a>
+            <dxi-item
+              dataField="user_login"
+              [label]="{ text: ('REGISTER.USERNAME' | translate) }"
+              [editorOptions]="{
+                placeholder: ('REGISTER.USERNAME' | translate),
+                mode: 'text',
+                stylingMode: 'outlined'
+              }"
+            >
+              <dxi-validation-rule
+                type="required"
+                [message]="'REGISTER.ERRORS.USERNAME_REQUIRED' | translate"
+              ></dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item
+              dataField="user_password"
+              editorType="dxTextBox"
+              [label]="{ text: ('REGISTER.PASSWORD' | translate) }"
+              [editorOptions]="{
+                placeholder: ('REGISTER.PASSWORD' | translate),
+                mode: hidePassword ? 'password' : 'text',
+                stylingMode: 'outlined',
+                buttons: passwordButtons
+              }"
+            >
+              <dxi-validation-rule
+                type="required"
+                [message]="'REGISTER.ERRORS.PASSWORD_REQUIRED' | translate"
+              ></dxi-validation-rule>
+              <dxi-validation-rule
+                type="custom"
+                [validationCallback]="validatePasswordStrength"
+                [message]="'REGISTER.ERRORS.PASSWORD_MIN_LENGTH' | translate"
+              ></dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item
+              dataField="user_confirm_password"
+              editorType="dxTextBox"
+              [label]="{ text: ('REGISTER.CONFIRM_PASSWORD' | translate) }"
+              [editorOptions]="{
+                placeholder: ('REGISTER.CONFIRM_PASSWORD' | translate),
+                mode: hideConfirmPassword ? 'password' : 'text',
+                stylingMode: 'outlined',
+                buttons: confirmPasswordButtons
+              }"
+            >
+              <dxi-validation-rule
+                type="required"
+                [message]="'REGISTER.ERRORS.PASSWORD_REQUIRED' | translate"
+              ></dxi-validation-rule>
+              <dxi-validation-rule
+                type="compare"
+                [comparisonTarget]="passwordComparison"
+                [message]="'REGISTER.ERRORS.PASSWORD_MISMATCH' | translate"
+              ></dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item itemType="simple">
+              <div class="auth-footer">
+                <div class="text-secondary">Already have an account?</div>
+                <a routerLink="/auth/sign-in">Login</a>
+              </div>
+            </dxi-item>
+          </dx-form>
+        </div>
+      </dxi-multi-view-item>
+
+      <!-- Step 2: Profile Information -->
+      <dxi-multi-view-item>
+        <div *dxTemplate>
+          <dx-form
+            [formData]="profileFormData"
+            [validationGroup]="validationGroups[1]"
+            labelLocation="top"
+            [showColonAfterLabel]="false"
+            [colCount]="3"
+          >
+            <dxi-item itemType="group" [colSpan]="3">
+              <dxi-item [colSpan]="3">
+                <div class="form-header">
+                  <h4>Profile Info</h4>
+                </div>
+              </dxi-item>
+            </dxi-item>
+
+            <app-error-toast></app-error-toast>
+
+            <dxi-item
+              dataField="fio_1"
+              [label]="{ text: 'First Name' }"
+              [editorOptions]="{
+                placeholder: 'First name',
+                stylingMode: 'outlined'
+              }"
+            >
+              <dxi-validation-rule
+                type="required"
+                message="First name is required"
+              ></dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item
+              dataField="fio_2"
+              [label]="{ text: 'Last Name' }"
+              [editorOptions]="{
+                placeholder: 'Last name',
+                stylingMode: 'outlined'
+              }"
+            >
+              <dxi-validation-rule
+                type="required"
+                message="Last name is required"
+              ></dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item
+              dataField="fio_3"
+              [label]="{ text: 'Patronymic' }"
+              [editorOptions]="{
+                placeholder: 'Patronymic',
+                stylingMode: 'outlined'
+              }"
+            >
+            </dxi-item>
+
+            <dxi-item
+              dataField="user_mail"
+              editorType="dxTextBox"
+              [label]="{ text: 'Email' }"
+              [colSpan]="3"
+              [editorOptions]="{
+                placeholder: 'Email',
+                mode: 'email',
+                stylingMode: 'outlined'
+              }"
+            >
+              <dxi-validation-rule
+                type="required"
+                message="Email is required"
+              ></dxi-validation-rule>
+              <dxi-validation-rule
+                type="email"
+                message="Invalid email format"
+              ></dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item
+              dataField="id_country"
+              editorType="dxSelectBox"
+              [label]="{ text: 'Country' }"
+              [colSpan]="3"
+              [editorOptions]="countryEditorOptions"
+            >
+              <dxi-validation-rule
+                type="required"
+                message="Choose a country"
+              ></dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item
+              dataField="user_tel"
+              editorType="dxTextBox"
+              [label]="{ text: 'Phone Number' }"
+              [colSpan]="3"
+              [editorOptions]="phoneEditorOptions"
+            >
+              <dxi-validation-rule
+                type="required"
+                message="Phone number is required"
+              ></dxi-validation-rule>
+            </dxi-item>
+          </dx-form>
+        </div>
+      </dxi-multi-view-item>
+
+      <!-- Step 3: Email Verification -->
+      <dxi-multi-view-item>
+        <div *dxTemplate>
+          <dx-form
+            [formData]="emailFormData"
+            [validationGroup]="validationGroups[2]"
+            labelLocation="top"
+            [showColonAfterLabel]="false"
+          >
+            <dxi-item itemType="group">
+              <dxi-item>
+                <div class="form-header">
+                  <h4>Email Verification</h4>
+                </div>
+              </dxi-item>
+            </dxi-item>
+
+            <app-error-toast></app-error-toast>
+            <app-message-toast></app-message-toast>
+
+            <dxi-item
+              dataField="code"
+              [label]="{ text: 'Verification Code' }"
+              [editorOptions]="verificationCodeEditorOptions"
+            >
+              <dxi-validation-rule
+                type="required"
+                message="Verification code is required"
+              ></dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item itemType="simple">
+              <div class="verification-timer">
+                <p *ngIf="timer() > 0">Resend code in {{ timer() }} seconds</p>
+                <dx-button
+                  *ngIf="timer() === 0"
+                  text="Resend Verification Code"
+                  type="normal"
+                  stylingMode="text"
+                  (onClick)="resendVerificationCode()"
+                ></dx-button>
+              </div>
+            </dxi-item>
+
+            <dxi-item itemType="simple" *ngIf="!showSuccessMessage()">
+              <div class="auth-footer">
+                <div class="text-secondary">Already have an account?</div>
+                <a routerLink="/auth/sign-in">Login</a>
+              </div>
+            </dxi-item>
+          </dx-form>
+        </div>
+      </dxi-multi-view-item>
+
+      <!-- Step 4: Success -->
+      <dxi-multi-view-item>
+        <div *dxTemplate>
+          <div class="success-message">
+            <app-message-toast></app-message-toast>
+            <div class="success-content">
+              <div class="dx-icon dx-icon-check success-icon"></div>
+              <h3>Registration Successful!</h3>
+              <p>Redirecting to login page...</p>
+              <a routerLink="/auth/sign-in">Log in now</a>
+            </div>
+          </div>
+        </div>
+      </dxi-multi-view-item>
+    </dx-multi-view>
+
+    <!-- Navigation Panel -->
+    <div class="nav-panel">
+      <div class="current-step">
+        @if (!showSuccessMessage()) {
+        <span>
+          Step <span class="selected-index">{{ selectedIndex + 1 }}</span> of
+          {{ steps.length }}
+        </span>
+        }
       </div>
-    </dxi-item>
-
-    <dxi-item itemType="button">
-      <dxo-button-options
-        width="100%"
-        type="default"
-        [useSubmitBehavior]="true"
-        [template]="'createAccountTemplate'"
-      >
-      </dxo-button-options>
-    </dxi-item>
-
-    <ng-container *dxTemplate="let item of 'createAccountTemplate'">
-      <span class="dx-button-text">
-        <ng-container *ngIf="loading; else notLoading">
-          <dx-load-indicator
-            width="24px"
-            height="24px"
-            [visible]="true"
-          ></dx-load-indicator>
-        </ng-container>
-
-        <ng-template #notLoading>Register</ng-template>
-      </span>
-    </ng-container>
-  </dx-form>
-  <div class="login-link">
-    Have an account? <a [routerLink]="redirectLink">Sign In</a>
+      <div class="nav-buttons">
+        <dx-button
+          id="prevButton"
+          [visible]="selectedIndex !== 0 && !showSuccessMessage()"
+          text="Back"
+          type="normal"
+          (onClick)="onPrevButtonClick()"
+          [width]="100"
+        >
+        </dx-button>
+        <dx-button
+          id="nextButton"
+          [text]="getNextButtonText()"
+          type="default"
+          (onClick)="onNextButtonClick()"
+          [width]="100"
+          [disabled]="loadingService.isLoading$ | async"
+        >
+        </dx-button>
+      </div>
+    </div>
   </div>
-  <app-login-oauth></app-login-oauth>
-</form>
+</div>

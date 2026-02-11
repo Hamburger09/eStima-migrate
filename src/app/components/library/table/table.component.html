@@ -91,7 +91,7 @@
       <!-- Add Button -->
       <dxi-item location="after" locateInMenu="auto" *ngIf="actions">
         <dx-button
-          [text]="addButtonText"
+          [text]="'COMMON.ADD' | translate"
           icon="plus"
           type="default"
           stylingMode="contained"
@@ -141,6 +141,7 @@
       [dataField]="col.key"
       [caption]="col.label | translate"
       [lookup]="col.lookup"
+      [width]="col.width"
       [setCellValue]="col.setCellValue"
       [validationRules]="col.required ? [{ type: 'required' }] : []"
       [calculateDisplayValue]="

@@ -37,7 +37,7 @@ export class RolesComponent implements OnInit {
       dataType: 'boolean', // Important for dxSwitch
       editorType: 'dxSwitch',
       calculateCellValue: (row) => row.id_status === 1, // number -> boolean
-
+      width: 120,
       setCellValue: (rowData, value) => {
         rowData.id_status = value ? 1 : 0; // boolean -> number
       },

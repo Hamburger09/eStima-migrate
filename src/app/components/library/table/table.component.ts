@@ -161,11 +161,16 @@ export class TableComponent {
     this.rowInserted.emit({
       data: e.data,
       done: () => {
-        e.component.cancelEditData(); // 🔥 closes popup
-        e.component.refresh(); // optional
+        // Make sure to close the edit state properly
+        if (e.component) {
+          e.component.cancelEditData();
+          e.component.refresh();
+        }
       },
       fail: (message: string) => {
-        this.errorService.showError(message); // 🔥 toast
+        this.errorService.showError(message);
+        // DON'T close the popup on failure so user can fix errors
+        // e.component.cancelEditData(); // Remove this
       },
     });
   }
@@ -175,10 +180,15 @@ export class TableComponent {
   }
 
   onAddClick(): void {
-    // open DevExtreme popup editor
-    this.grid?.instance?.addRow();
-    // optional: also emit
-    this.addClick.emit();
+    if (this.grid?.instance) {
+      // Clear any existing edit state first
+      this.grid.instance.cancelEditData();
+
+      // Use setTimeout to ensure clean state
+      setTimeout(() => {
+        this.grid.instance.addRow();
+      }, 0);
+    }
   }
 
   onRowUpdating(e: any) {
@@ -247,6 +257,7 @@ export class TableComponent {
   }
 
   onCellPrepared(e: any) {
+    console.log('Cell Prepared:', e);
     if (e.rowType !== 'data') return;
 
     if (e.column.dataField === 'id_status') {

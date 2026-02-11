@@ -66,43 +66,39 @@ export class InterceptorService implements HttpInterceptor {
       }),
 
       catchError((error: HttpErrorResponse) => {
-        // ✅ Don't run auth/refresh logic for external calls (DevExtreme demo API etc.)
         if (!isOurApiRequest) {
           return throwError(() => error);
         }
 
         const isJwtExpired = error.status === 401;
 
-        // ⛔ If refresh itself failed -> logout
         if (isRefreshCall) {
-          this.authService.logout().subscribe();
+          // DON'T call logout here - let refreshToken() method handle it
           return throwError(() => error);
         }
 
-        // 🔁 Try refresh on 401 only for our API requests
         if (isJwtExpired) {
           return this.authService.refreshToken().pipe(
             switchMap((newToken: string | null) => {
               if (!newToken) {
-                this.authService.logout().subscribe();
-                return throwError(() => error);
+                // Token refresh failed, but don't call logout here either
+                // The refreshToken() method already handles navigation
+                return throwError(() => new Error('Token refresh failed'));
               }
 
-              // ✅ Retry original request with new token
               const retriedReq = req.clone({
                 setHeaders: { Authorization: `Bearer ${newToken}` },
               });
-
               return next.handle(retriedReq);
             }),
             catchError((refreshError) => {
-              this.authService.logout().subscribe();
+              // Again, don't call logout - already handled
               return throwError(() => refreshError);
             })
           );
         }
 
-        // 📛 Other errors for our API
+        // Other errors
         let message = 'An unknown error occurred!';
         if (error.error instanceof ErrorEvent) {
           message = `Error: ${error.error.message}`;
@@ -113,7 +109,6 @@ export class InterceptorService implements HttpInterceptor {
             error.message ||
             message;
         }
-
         this.errorService.showError(message);
         return throwError(() => error);
       }),

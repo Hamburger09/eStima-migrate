@@ -7,12 +7,10 @@ i18n
   <app-table
     [columns]="cityColumns"
     [data]="cities()"
-    [title]="'USERS.USERS'"
+    [title]="'CITIES.CITIES'"
     [actions]="true"
     (rowInserted)="onCityInserted($event)"
     (rowUpdated)="onCityUpdated($event)"
     (rowRemoved)="onCityRemoved($event)"
-    [showDetails]="true"
-    [showDetailsIcon]="'download'"
   ></app-table>
 </div>

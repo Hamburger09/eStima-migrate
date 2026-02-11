@@ -86,19 +86,29 @@ export class AuthService {
   // Check if the user is logged in and handle token refresh if needed
   isLoggedIn(): Observable<boolean> {
     const token = this.getTokenFromStorage();
-    if (!token) return of(false);
+    if (!token) {
+      console.log('No token found');
+      return of(false);
+    }
 
-    if (!this.isTokenExpired()) return of(true);
+    if (!this.isTokenExpired()) {
+      console.log('Token is valid');
+      return of(true);
+    }
 
+    console.log('Token expired, attempting refresh...');
     return this.refreshToken().pipe(
-      map((newToken) => !!newToken),
+      map((newToken) => {
+        const result = !!newToken;
+        console.log('Refresh result:', result);
+        return result;
+      }),
       catchError((err) => {
-        console.error('Refresh token error:', err);
-        return of(false); // Prevent freeze
+        console.error('isLoggedIn refresh error:', err);
+        return of(false); // Just return false, don't navigate or clear storage here
       })
     );
   }
-
   isTokenExpired(): boolean {
     const token = this.getTokenFromStorage();
     if (!token) return true;
