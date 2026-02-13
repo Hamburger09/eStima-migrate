@@ -2,8 +2,10 @@
 title="{{'NAV.ONLINE_USERS' | translate}}"
 ></app-page-header> -->
 
-<app-table
-  [columns]="userColumns"
-  [data]="onlineUsers()"
-  [actions]="false"
-></app-table>
+<div class="view-wrapper list-page crm-contact-list">
+  <app-table
+    [columns]="userColumns"
+    [data]="onlineUsers()"
+    [actions]="false"
+  ></app-table>
+</div>

@@ -1,0 +1,121 @@
+// .construction-container {
+//   padding: 20px;
+//   background-color: var(--base-bg);
+//   border-radius: 8px;
+
+//   ::ng-deep {
+//     // Tab styles
+//     .dx-tabpanel {
+//       .dx-tab {
+//         padding: 10px 16px;
+
+//         &.dx-tab-selected {
+//           background-color: var(--base-accent);
+//           color: white;
+//         }
+//       }
+//     }
+
+//     // Fixed tab style
+//     .fixed-tab {
+//       font-weight: 600;
+//       padding: 8px 16px;
+//     }
+
+//     // Smeta tab with close button
+//     .smeta-tab {
+//       display: flex;
+//       align-items: center;
+//       justify-content: space-between;
+//       gap: 12px;
+//       padding: 8px 16px;
+//       min-width: 120px;
+
+//       .dx-icon-close {
+//         cursor: pointer;
+//         font-size: 14px;
+//         color: #999;
+//         transition: color 0.2s;
+
+//         &:hover {
+//           color: var(--base-danger);
+//         }
+//       }
+//     }
+
+//     // Tree list styles
+//     .dx-treelist {
+//       .dx-row {
+//         cursor: pointer;
+
+//         &:hover {
+//           background-color: var(--base-hover-bg);
+//         }
+//       }
+//     }
+//   }
+// }
+
+// // Popup styles
+// .confirmation-content {
+//   padding: 20px;
+
+//   h5 {
+//     font-size: 18px;
+//     font-weight: 600;
+//     margin-bottom: 20px;
+//     color: var(--base-accent);
+//   }
+
+//   .info-section {
+//     margin-bottom: 16px;
+
+//     .label {
+//       font-size: 13px;
+//       font-weight: 600;
+//       color: #666;
+//       margin-bottom: 6px;
+//     }
+
+//     .value-box {
+//       background-color: var(--base-border-color);
+//       padding: 10px 12px;
+//       border-radius: 4px;
+//       border: 1px solid var(--border-color);
+//     }
+//   }
+
+//   .button-group {
+//     display: flex;
+//     gap: 10px;
+//     justify-content: flex-end;
+//     margin-top: 20px;
+//   }
+// }
+
+// // Stroyka list view
+// .stroyka-list {
+//   padding: 20px;
+
+//   .stroyka-list-container {
+//     background: var(--base-bg);
+//     border-radius: 8px;
+//     padding: 20px;
+//   }
+// }
+
+// // DevExtreme form field styling
+// .dx-field {
+//   margin-bottom: 16px;
+
+//   .dx-field-label {
+//     font-weight: 600;
+//     margin-bottom: 6px;
+//     font-size: 14px;
+//   }
+
+//   .dx-field-value {
+//     display: flex;
+//     gap: 10px;
+//   }
+// }

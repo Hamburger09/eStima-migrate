@@ -1,345 +1,345 @@
-.register-container {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
+// .register-container {
+//   max-width: 900px;
+//   margin: 2rem auto;
+//   padding: 0 1rem;
+// }
 
-// Content area
-.content {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-  margin-top: 2rem;
-}
+// // Content area
+// .content {
+//   background: white;
+//   border-radius: 8px;
+//   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+//   padding: 2rem;
+//   margin-top: 2rem;
+// }
 
-// Form Header
-.form-header {
-  margin-bottom: 1.5rem;
+// // Form Header
+// .form-header {
+//   margin-bottom: 1.5rem;
 
-  h1,
-  h4 {
-    margin: 0;
-    color: #333;
-  }
+//   h1,
+//   h4 {
+//     margin: 0;
+//     color: #333;
+//   }
 
-  h1 {
-    font-size: 1.75rem;
-    font-weight: 600;
-  }
+//   h1 {
+//     font-size: 1.75rem;
+//     font-weight: 600;
+//   }
 
-  h4 {
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-}
+//   h4 {
+//     font-size: 1.5rem;
+//     font-weight: 600;
+//   }
+// }
 
-// Navigation Panel
-.nav-panel {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #e0e0e0;
-}
+// // Navigation Panel
+// .nav-panel {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   margin-top: 2rem;
+//   padding-top: 1.5rem;
+//   border-top: 1px solid #e0e0e0;
+// }
 
-.current-step {
-  color: #6c757d;
-  font-size: 14px;
+// .current-step {
+//   color: #6c757d;
+//   font-size: 14px;
 
-  .selected-index {
-    font-weight: 600;
-    color: #337ab7;
-  }
-}
+//   .selected-index {
+//     font-weight: 600;
+//     color: #337ab7;
+//   }
+// }
 
-.nav-buttons {
-  display: flex;
-  gap: 1rem;
-}
+// .nav-buttons {
+//   display: flex;
+//   gap: 1rem;
+// }
 
-// DevExtreme Customization
-::ng-deep {
-  // Stepper styling
-  .dx-stepper {
-    margin-bottom: 0;
+// // DevExtreme Customization
+// ::ng-deep {
+//   // Stepper styling
+//   .dx-stepper {
+//     margin-bottom: 0;
 
-    &.readonly {
-      pointer-events: none;
-      opacity: 0.6;
-    }
+//     &.readonly {
+//       pointer-events: none;
+//       opacity: 0.6;
+//     }
 
-    .dx-stepper-item {
-      &.dx-state-focused {
-        .dx-stepper-item-indicator {
-          border-color: #337ab7;
-        }
-      }
-    }
+//     .dx-stepper-item {
+//       &.dx-state-focused {
+//         .dx-stepper-item-indicator {
+//           border-color: #337ab7;
+//         }
+//       }
+//     }
 
-    .dx-stepper-item-indicator {
-      background-color: #f5f5f5;
-      border: 2px solid #ddd;
-      color: #999;
+//     .dx-stepper-item-indicator {
+//       background-color: #f5f5f5;
+//       border: 2px solid #ddd;
+//       color: #999;
 
-      &.dx-stepper-item-indicator-with-icon {
-        .dx-icon {
-          color: #999;
-        }
-      }
-    }
+//       &.dx-stepper-item-indicator-with-icon {
+//         .dx-icon {
+//           color: #999;
+//         }
+//       }
+//     }
 
-    .dx-stepper-item.dx-stepper-item-selected {
-      .dx-stepper-item-indicator {
-        background-color: #337ab7;
-        border-color: #337ab7;
-        color: white;
+//     .dx-stepper-item.dx-stepper-item-selected {
+//       .dx-stepper-item-indicator {
+//         background-color: #337ab7;
+//         border-color: #337ab7;
+//         color: white;
 
-        .dx-icon {
-          color: white;
-        }
-      }
+//         .dx-icon {
+//           color: white;
+//         }
+//       }
 
-      .dx-stepper-item-content {
-        color: #337ab7;
-      }
-    }
+//       .dx-stepper-item-content {
+//         color: #337ab7;
+//       }
+//     }
 
-    .dx-stepper-item.dx-stepper-item-passed {
-      .dx-stepper-item-indicator {
-        background-color: #5cb85c;
-        border-color: #5cb85c;
-        color: white;
+//     .dx-stepper-item.dx-stepper-item-passed {
+//       .dx-stepper-item-indicator {
+//         background-color: #5cb85c;
+//         border-color: #5cb85c;
+//         color: white;
 
-        .dx-icon {
-          color: white;
-        }
-      }
+//         .dx-icon {
+//           color: white;
+//         }
+//       }
 
-      .dx-stepper-item-content {
-        color: #5cb85c;
-      }
-    }
+//       .dx-stepper-item-content {
+//         color: #5cb85c;
+//       }
+//     }
 
-    .dx-stepper-step-indicator-separator {
-      background-color: #ddd;
+//     .dx-stepper-step-indicator-separator {
+//       background-color: #ddd;
 
-      &.dx-stepper-step-indicator-separator-passed {
-        background-color: #5cb85c;
-      }
-    }
-  }
+//       &.dx-stepper-step-indicator-separator-passed {
+//         background-color: #5cb85c;
+//       }
+//     }
+//   }
 
-  // Form styling
-  .dx-form {
-    .dx-field-item-label-text {
-      font-weight: 500;
-      color: #333;
-    }
+//   // Form styling
+//   .dx-form {
+//     .dx-field-item-label-text {
+//       font-weight: 500;
+//       color: #333;
+//     }
 
-    .dx-texteditor {
-      border-radius: 4px;
+//     .dx-texteditor {
+//       border-radius: 4px;
 
-      &.dx-state-focused {
-        border-color: #337ab7;
-      }
-    }
+//       &.dx-state-focused {
+//         border-color: #337ab7;
+//       }
+//     }
 
-    .dx-invalid {
-      .dx-texteditor {
-        border-color: #dc3545;
-      }
-    }
+//     .dx-invalid {
+//       .dx-texteditor {
+//         border-color: #dc3545;
+//       }
+//     }
 
-    .dx-invalid-message {
-      font-size: 0.875rem;
-      color: #dc3545;
-    }
-  }
+//     .dx-invalid-message {
+//       font-size: 0.875rem;
+//       color: #dc3545;
+//     }
+//   }
 
-  // Button styling
-  .dx-button {
-    border-radius: 4px;
-    font-weight: 500;
+//   // Button styling
+//   .dx-button {
+//     border-radius: 4px;
+//     font-weight: 500;
 
-    &.dx-button-default {
-      background-color: #337ab7;
+//     &.dx-button-default {
+//       background-color: #337ab7;
 
-      &:hover {
-        background-color: #286090;
-      }
-    }
+//       &:hover {
+//         background-color: #286090;
+//       }
+//     }
 
-    &.dx-button-normal {
-      background-color: #6c757d;
+//     &.dx-button-normal {
+//       background-color: #6c757d;
 
-      &:hover {
-        background-color: #5a6268;
-      }
-    }
+//       &:hover {
+//         background-color: #5a6268;
+//       }
+//     }
 
-    &.dx-button-success {
-      background-color: #5cb85c;
+//     &.dx-button-success {
+//       background-color: #5cb85c;
 
-      &:hover {
-        background-color: #4cae4c;
-      }
-    }
-  }
+//       &:hover {
+//         background-color: #4cae4c;
+//       }
+//     }
+//   }
 
-  // MultiView
-  .dx-multiview {
-    .dx-multiview-item-content {
-      padding: 0;
-    }
-  }
-}
+//   // MultiView
+//   .dx-multiview {
+//     .dx-multiview-item-content {
+//       padding: 0;
+//     }
+//   }
+// }
 
-// Auth Footer
-.auth-footer {
-  text-align: center;
-  margin-top: 1rem;
+// // Auth Footer
+// .auth-footer {
+//   text-align: center;
+//   margin-top: 1rem;
 
-  .text-secondary {
-    color: #6c757d;
-    margin-bottom: 0.5rem;
-  }
+//   .text-secondary {
+//     color: #6c757d;
+//     margin-bottom: 0.5rem;
+//   }
 
-  a {
-    color: #337ab7;
-    text-decoration: none;
-    font-weight: 500;
+//   a {
+//     color: #337ab7;
+//     text-decoration: none;
+//     font-weight: 500;
 
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
+//     &:hover {
+//       text-decoration: underline;
+//     }
+//   }
+// }
 
-// Verification Timer
-.verification-timer {
-  text-align: center;
-  margin: 1rem 0;
+// // Verification Timer
+// .verification-timer {
+//   text-align: center;
+//   margin: 1rem 0;
 
-  p {
-    color: #6c757d;
-    margin-bottom: 0.5rem;
-  }
-}
+//   p {
+//     color: #6c757d;
+//     margin-bottom: 0.5rem;
+//   }
+// }
 
-// Success Message
-.success-message {
-  text-align: center;
-  padding: 3rem 2rem;
+// // Success Message
+// .success-message {
+//   text-align: center;
+//   padding: 3rem 2rem;
 
-  .success-content {
-    margin-top: 1rem;
-  }
+//   .success-content {
+//     margin-top: 1rem;
+//   }
 
-  .success-icon {
-    font-size: 64px;
-    color: #5cb85c;
-    margin-bottom: 1rem;
-  }
+//   .success-icon {
+//     font-size: 64px;
+//     color: #5cb85c;
+//     margin-bottom: 1rem;
+//   }
 
-  h3 {
-    color: #333;
-    margin-bottom: 0.5rem;
-    font-size: 1.5rem;
-  }
+//   h3 {
+//     color: #333;
+//     margin-bottom: 0.5rem;
+//     font-size: 1.5rem;
+//   }
 
-  p {
-    color: #6c757d;
-    margin-bottom: 1rem;
-  }
+//   p {
+//     color: #6c757d;
+//     margin-bottom: 1rem;
+//   }
 
-  a {
-    color: #337ab7;
-    text-decoration: none;
-    font-weight: 500;
+//   a {
+//     color: #337ab7;
+//     text-decoration: none;
+//     font-weight: 500;
 
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
+//     &:hover {
+//       text-decoration: underline;
+//     }
+//   }
+// }
 
-// Error and Message Toast
-app-error-toast,
-app-message-toast {
-  display: block;
-  margin-bottom: 1rem;
-}
+// // Error and Message Toast
+// app-error-toast,
+// app-message-toast {
+//   display: block;
+//   margin-bottom: 1rem;
+// }
 
-// Responsive Design
-@media (max-width: 768px) {
-  .register-container {
-    padding: 0 0.5rem;
-  }
+// // Responsive Design
+// @media (max-width: 768px) {
+//   .register-container {
+//     padding: 0 0.5rem;
+//   }
 
-  .content {
-    padding: 1.5rem 1rem;
-  }
+//   .content {
+//     padding: 1.5rem 1rem;
+//   }
 
-  .form-header {
-    h1 {
-      font-size: 1.5rem;
-    }
+//   .form-header {
+//     h1 {
+//       font-size: 1.5rem;
+//     }
 
-    h4 {
-      font-size: 1.25rem;
-    }
-  }
+//     h4 {
+//       font-size: 1.25rem;
+//     }
+//   }
 
-  .nav-panel {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: stretch;
-  }
+//   .nav-panel {
+//     flex-direction: column;
+//     gap: 1rem;
+//     align-items: stretch;
+//   }
 
-  .nav-buttons {
-    justify-content: space-between;
-    width: 100%;
-  }
+//   .nav-buttons {
+//     justify-content: space-between;
+//     width: 100%;
+//   }
 
-  ::ng-deep {
-    .dx-form {
-      .dx-layout-manager {
-        .dx-field-item {
-          padding: 0 !important;
-        }
-      }
-    }
+//   ::ng-deep {
+//     .dx-form {
+//       .dx-layout-manager {
+//         .dx-field-item {
+//           padding: 0 !important;
+//         }
+//       }
+//     }
 
-    .dx-stepper {
-      .dx-stepper-item-content {
-        font-size: 12px;
-      }
+//     .dx-stepper {
+//       .dx-stepper-item-content {
+//         font-size: 12px;
+//       }
 
-      .dx-stepper-item-indicator {
-        width: 32px;
-        height: 32px;
+//       .dx-stepper-item-indicator {
+//         width: 32px;
+//         height: 32px;
 
-        .dx-icon {
-          font-size: 16px;
-        }
-      }
-    }
-  }
-}
+//         .dx-icon {
+//           font-size: 16px;
+//         }
+//       }
+//     }
+//   }
+// }
 
-@media (max-width: 576px) {
-  ::ng-deep {
-    .dx-stepper {
-      .dx-stepper-item-content {
-        display: none;
-      }
-    }
-  }
+// @media (max-width: 576px) {
+//   ::ng-deep {
+//     .dx-stepper {
+//       .dx-stepper-item-content {
+//         display: none;
+//       }
+//     }
+//   }
 
-  .current-step {
-    width: 100%;
-    text-align: center;
-  }
-}
+//   .current-step {
+//     width: 100%;
+//     text-align: center;
+//   }
+// }

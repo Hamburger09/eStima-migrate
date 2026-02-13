@@ -8,15 +8,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'app-unauthenticated-content',
   templateUrl: './unathenticated-content.html',
-
-  styles: [
-    `
-      :host {
-        width: 100%;
-        height: 100%;
-      }
-    `,
-  ],
+  styleUrls: ['./unathenticated-content.scss'],
   imports: [CommonModule, RouterModule, SingleCardComponent, NavbarComponent],
 })
 export class UnauthenticatedContentComponent {
@@ -36,11 +28,11 @@ export class UnauthenticatedContentComponent {
     const path = this.router.url.split('/').at(-1);
     switch (path) {
       case 'sign-in':
-        return 'Sign In';
+        return 'LOGIN.TITLE';
       case 'reset-password':
         return 'Reset Password';
       case 'register':
-        return 'Register';
+        return 'REGISTER.TITLE';
       case 'change-password':
         return 'Change Password';
       default:

@@ -140,6 +140,32 @@ export const routes: Routes = [
         canActivate: [authGuard],
       },
       {
+        path: 'updates',
+        loadChildren: () =>
+          import('./pages/updates/routes').then((m) => m.routes),
+        data: {
+          roles: [ROLES.ADMIN, ROLES.USER],
+        },
+        canActivate: [authGuard],
+      },
+      {
+        path: 'exe',
+        loadChildren: () => import('./pages/exe/routes').then((m) => m.routes),
+        canActivate: [authGuard],
+        data: {
+          roles: [ROLES.ADMIN, ROLES.USER],
+        },
+      },
+      {
+        path: 'objects',
+        loadChildren: () =>
+          import('./pages/objects/routes').then((m) => m.routes),
+        canActivate: [authGuard],
+        data: {
+          roles: [ROLES.ADMIN, ROLES.USER],
+        },
+      },
+      {
         path: 'crm-contact-list',
         component: CrmContactListComponent,
         data: {

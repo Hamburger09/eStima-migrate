@@ -62,3 +62,10 @@ export enum TRANSFER_STATUS {
   SENT = 1,
   RECEIVED = 2,
 }
+
+export const ROLE_NAMES: Record<number, string> = {
+  1: 'Заказчик',
+  2: 'Подрядчик',
+  3: 'Проектировщик',
+  4: 'Эксперт',
+};

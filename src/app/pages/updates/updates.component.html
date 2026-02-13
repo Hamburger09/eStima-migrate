@@ -2,7 +2,10 @@
   <app-table
     [columns]="updateColumns"
     [data]="updates()"
-    [title]="'USERS.USERS'"
-    [actions]="true"
+    [title]="'UPDATES.UPDATES'"
+    [actions]="false"
+    [showDetails]="true"
+    [showDetailsIcon]="'download'"
+    (showDetailsCallback)="downloadUpdateFile($event)"
   ></app-table>
 </div>

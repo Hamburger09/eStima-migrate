@@ -150,7 +150,9 @@
   "UPDATES": {
     "UPDATES": "Yangilanishlar",
     "UPDATE_ID": "Yangilanish IDsi",
-    "COUNTRY_ID": "Mamlakat IDsi"
+    "COUNTRY": "Mamlakat",
+    "DATE": "Sana",
+    "NAME": "Nomi"
   },
   "NAV": {
     "DASHBOARD": "Boshqaruv paneli",

@@ -1,0 +1,336 @@
+<div class="view-wrapper list-page crm-contact-list">
+  <!-- Error Alert -->
+  <dx-toast
+    [(visible)]="showError"
+    [message]="errorMessage() || ''"
+    type="error"
+    [displayTime]="3000"
+  ></dx-toast>
+
+  <!-- Ribbon -->
+  <app-ribbon
+    [tabs]="ribbonTabs"
+    (activeKeyChange)="activeTab = $event"
+    (action)="handleRibbonAction($event)"
+  ></app-ribbon>
+
+  <!-- Stroyka List View -->
+  <div class="stroyka-list" *ngIf="!currentStroykaId">
+    <div class="stroyka-list-container">
+      <app-table
+        [columns]="stroykaColumns"
+        [data]="stroykaUsers()"
+        [actions]="false"
+        [showEditDetails]="false"
+        [showSelectAll]="false"
+        [selectable]="true"
+        [selectionChange]="onStroykaSelect"
+        [selectedItems]="selectedStroyka()"
+      ></app-table>
+    </div>
+  </div>
+
+  <!-- Construction Detail View -->
+  <div *ngIf="currentStroykaId">
+    <app-page-header
+      [title]="selectedConstruction().name"
+      [buttonLabel]="'COMMON.BACK_TO_LIST' | translate"
+      (buttonClick)="onBackToList()"
+    ></app-page-header>
+
+    <div class="construction-container">
+      <dx-sortable
+        [data]="tabs()"
+        itemOrientation="horizontal"
+        dragDirection="horizontal"
+        [filter]="'.smeta-tab'"
+        [allowDropInsideItem]="false"
+        (onReorder)="onTabReorder($event)"
+      >
+        <dx-tab-panel
+          [dataSource]="tabs()"
+          [selectedIndex]="selectedIndex()"
+          itemTitleTemplate="title"
+          itemTemplate="item"
+          [deferRendering]="false"
+          [showNavButtons]="true"
+          [repaintChangesOnly]="true"
+          [height]="600"
+        >
+          <!-- TAB TITLE TEMPLATE -->
+          <div *dxTemplate="let tab of 'title'">
+            <!-- Fixed Tab -->
+            <div *ngIf="tab.type === 'fixed'" class="fixed-tab">
+              {{ tab.title | translate }}
+            </div>
+
+            <!-- Smeta Tab with Close Button -->
+            <div *ngIf="tab.type === 'smeta'" class="smeta-tab">
+              <span>{{ tab.title }}</span>
+              <i
+                class="dx-icon dx-icon-close"
+                (click)="removeTab(tab); $event.stopPropagation()"
+              ></i>
+            </div>
+          </div>
+
+          <!-- TAB CONTENT TEMPLATE -->
+          <div *dxTemplate="let tab of 'item'">
+            <!-- Objects & Smetas Tree -->
+            <dx-tree-list
+              *ngIf="tab.id === 'objects'"
+              [dataSource]="objectsTreeData()"
+              keyExpr="id"
+              parentIdExpr="parent_id"
+              hasItemsExpr="hasItems"
+              [showBorders]="true"
+              [height]="550"
+              [showRowLines]="true"
+              [hoverStateEnabled]="true"
+              [focusedRowEnabled]="true"
+              (onRowDblClick)="onRowDblClick($event)"
+            >
+              <dxi-column dataField="name" caption="Name"></dxi-column>
+            </dx-tree-list>
+
+            <!-- Svod Resources Tab -->
+            <app-table-smeta
+              *ngIf="tab.id === 'svod'"
+              [data]="svod_resources()"
+              [svod_resources]="true"
+              [constructionId]="currentStroykaId"
+              (changedResources)="onChangedSvodResources($event)"
+            ></app-table-smeta>
+
+            <!-- Dynamic Smeta Tabs -->
+            <app-table-smeta
+              *ngIf="tab.type === 'smeta'"
+              [data]="tab.data?.razdels || []"
+              [readonly]="readonly()"
+              [constructionId]="currentStroykaId"
+              (changedResources)="onChangedSvodResources($event)"
+            ></app-table-smeta>
+          </div>
+        </dx-tab-panel>
+      </dx-sortable>
+    </div>
+  </div>
+
+  <!-- Add Stroyka User Popup -->
+  <dx-popup
+    [(visible)]="showAddUserPopup"
+    [showTitle]="true"
+    [title]="'CONSTRUCTION.ADD_USER_TO_CONSTRUCTION' | translate"
+    [width]="500"
+    [height]="'auto'"
+    [dragEnabled]="false"
+  >
+    <div *dxTemplate="let data of 'content'">
+      <form
+        [formGroup]="addStroykaUserForm"
+        (ngSubmit)="onAddStroykaUserFormSubmit()"
+      >
+        <!-- User Client ID Input -->
+        <div
+          class="dx-field"
+          *ngIf="!addStroykaUserForm.get('user_id_recipient')?.value"
+        >
+          <div class="dx-field-label">
+            {{ "USERS.USER_CLIENT_ID" | translate }}
+          </div>
+          <div class="dx-field-value">
+            <dx-text-box
+              formControlName="user_client_id"
+              [placeholder]="'USERS.PLACEHOLDERS.ENTER_CLIENT_ID' | translate"
+            ></dx-text-box>
+          </div>
+        </div>
+
+        <!-- User Select Box -->
+        <div
+          class="dx-field"
+          *ngIf="!addStroykaUserForm.get('user_client_id')?.value"
+        >
+          <div class="dx-field-label">
+            {{ "COMMON.OR" | translate }} {{ "SELECT.USER" | translate }}
+          </div>
+          <div class="dx-field-value">
+            <dx-select-box
+              formControlName="user_id_recipient"
+              [dataSource]="recipientUsers()"
+              displayExpr="fio_1"
+              valueExpr="id"
+              [placeholder]="'SELECT.USER' | translate"
+              (onValueChanged)="onRecipientSelect()"
+            >
+              <div *dxTemplate="let user of 'item'">
+                {{ user.user_client_id }} - {{ user.fio_1 || "N/A" }}
+                {{ user.fio_2 || "N/A" }}
+              </div>
+            </dx-select-box>
+          </div>
+        </div>
+
+        <!-- Role Select Box -->
+        <div class="dx-field">
+          <div class="dx-field-label">{{ "USERS.ROLE" | translate }}</div>
+          <div class="dx-field-value">
+            <dx-select-box
+              formControlName="role_id"
+              [dataSource]="stroykaRoles()"
+              displayExpr="name"
+              valueExpr="id"
+              [placeholder]="'SELECT.ROLE' | translate"
+            ></dx-select-box>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="dx-field">
+          <div class="dx-field-value">
+            <dx-button
+              text="{{ 'COMMON.NEXT' | translate }}"
+              type="default"
+              [useSubmitBehavior]="true"
+              [disabled]="
+                !addStroykaUserForm.get('role_id')?.value ||
+                (!addStroykaUserForm.get('user_id_recipient')?.value &&
+                  !addStroykaUserForm.get('user_client_id')?.value)
+              "
+            ></dx-button>
+            <dx-button
+              text="{{ 'COMMON.CANCEL' | translate }}"
+              stylingMode="outlined"
+              (onClick)="showAddUserPopup = false"
+              [style.margin-left.px]="10"
+            ></dx-button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </dx-popup>
+
+  <!-- Confirm Add User Popup -->
+  <dx-popup
+    [(visible)]="showConfirmUserPopup"
+    [showTitle]="true"
+    [title]="'STROYKA.CONFIRM_ADD_USER' | translate"
+    [width]="500"
+    [height]="'auto'"
+    [dragEnabled]="false"
+  >
+    <div *dxTemplate="let data of 'content'">
+      <div class="confirmation-content">
+        <h5 class="mb-3">{{ "STROYKA.CONFIRMATION_TITLE" | translate }}</h5>
+
+        <div class="info-section">
+          <p class="label">{{ "STROYKA.RECIPIENT" | translate }}</p>
+          <div class="value-box">
+            {{ recipient()?.fio_1 || "N/A" }} {{ recipient()?.fio_2 || "N/A" }}
+          </div>
+        </div>
+
+        <div class="info-section">
+          <p class="label">{{ "STROYKA.SELECTED_STROYKA" | translate }}</p>
+          <div class="value-box" *ngFor="let stroyka of selectedStroyka()">
+            {{ stroyka.name }}
+          </div>
+        </div>
+
+        <p class="mt-4">{{ "STROYKA.CONFIRM_MESSAGE" | translate }}</p>
+
+        <div class="button-group">
+          <dx-button
+            text="{{ 'COMMON.CONFIRM' | translate }}"
+            type="default"
+            (onClick)="onConfirmAddStroykaUser()"
+          ></dx-button>
+          <dx-button
+            text="{{ 'COMMON.CANCEL' | translate }}"
+            stylingMode="outlined"
+            (onClick)="showConfirmUserPopup = false"
+          ></dx-button>
+        </div>
+      </div>
+    </div>
+  </dx-popup>
+
+  <!-- Send Svod Resource Price Popup -->
+  <dx-popup
+    [(visible)]="showSendPricePopup"
+    [showTitle]="true"
+    [title]="'CONSTRUCTION.SEND.SVOD_RESOURCE_PRICE' | translate"
+    [width]="700"
+    [height]="'auto'"
+    [dragEnabled]="false"
+  >
+    <div *dxTemplate="let data of 'content'">
+      <div class="confirmation-content">
+        <h5 class="mb-3">
+          {{ "CONSTRUCTION.CHANGED_RESOURCE_SUMMARY" | translate }}
+        </h5>
+
+        <div class="info-section">
+          <p class="label">{{ "STROYKA.SELECTED_STROYKA" | translate }}</p>
+          <div class="value-box" *ngFor="let stroyka of selectedStroyka()">
+            {{ stroyka.name }} (ID: {{ stroyka.id }})
+          </div>
+        </div>
+
+        <!-- Changed Resources Table -->
+        <dx-data-grid
+          [dataSource]="changedResourcesList()"
+          [showBorders]="true"
+          [columnAutoWidth]="true"
+          [height]="300"
+        >
+          <dxi-column dataField="kodr" caption="Code"></dxi-column>
+          <dxi-column dataField="name" caption="Resource Name"></dxi-column>
+          <dxi-column dataField="old_price" caption="Old Price"></dxi-column>
+          <dxi-column dataField="price" caption="New Price"></dxi-column>
+        </dx-data-grid>
+
+        <p class="mt-3">{{ "CONSTRUCTION.CONFIRM_SEND_PRICES" | translate }}</p>
+
+        <div class="button-group">
+          <dx-button
+            text="{{ 'COMMON.CONFIRM' | translate }}"
+            type="default"
+            (onClick)="onConfirmSendChangedSvodResources()"
+          ></dx-button>
+          <dx-button
+            text="{{ 'COMMON.CANCEL' | translate }}"
+            stylingMode="outlined"
+            (onClick)="showSendPricePopup = false"
+          ></dx-button>
+        </div>
+      </div>
+    </div>
+  </dx-popup>
+
+  <!-- Delete Confirmation Popup -->
+  <dx-popup
+    [(visible)]="showDeletePopup"
+    [showTitle]="true"
+    [title]="'COMMON.DELETE_CONSTRUCTION' | translate"
+    [width]="400"
+    [height]="'auto'"
+    [dragEnabled]="false"
+  >
+    <div *dxTemplate="let data of 'content'">
+      <p>{{ "CONSTRUCTION.CONFIRM_DELETE" | translate }}</p>
+      <div class="button-group">
+        <dx-button
+          text="{{ 'COMMON.CONFIRM' | translate }}"
+          type="danger"
+          (onClick)="confirmDelete()"
+        ></dx-button>
+        <dx-button
+          text="{{ 'COMMON.CANCEL' | translate }}"
+          stylingMode="outlined"
+          (onClick)="showDeletePopup = false"
+        ></dx-button>
+      </div>
+    </div>
+  </dx-popup>
+</div>

@@ -1,0 +1,22 @@
+<div class="exe-container">
+  <div class="exe-card">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-box">
+      <dx-load-indicator [height]="60" [width]="60"></dx-load-indicator>
+      <p class="status-text">{{ statusMessage | translate }}</p>
+      <dx-button
+        text="{{ 'COMMON.CANCEL' | translate }}"
+        type="default"
+        stylingMode="outlined"
+        icon="close"
+        (onClick)="cancelDownload()"
+      ></dx-button>
+    </div>
+
+    <!-- Done State -->
+    <div *ngIf="!isLoading && statusMessage" class="done-box">
+      <i class="dx-icon dx-icon-info"></i>
+      <p class="status-text">{{ statusMessage | translate }}</p>
+    </div>
+  </div>
+</div>

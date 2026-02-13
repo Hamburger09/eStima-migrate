@@ -36,6 +36,7 @@
             "styles": [
               "src/styles.scss",
               "devexpress-gantt/dist/dx-gantt.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               {
                 "input": "devextreme/scss/bundles/dx.fluent.blue.light.scss",
                 "bundleName": "theme-light"
@@ -53,7 +54,9 @@
                 "bundleName": "theme-dark"
               }
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {

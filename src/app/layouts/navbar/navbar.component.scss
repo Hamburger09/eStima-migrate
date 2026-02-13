@@ -9,6 +9,11 @@
 header {
   padding: var(--header-toolbar-vertical-padding) 0;
   background-color: var(--base-bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
 
   .header-toolbar {
     padding-right: var(--content-padding);

@@ -257,7 +257,6 @@ export class TableComponent {
   }
 
   onCellPrepared(e: any) {
-    console.log('Cell Prepared:', e);
     if (e.rowType !== 'data') return;
 
     if (e.column.dataField === 'id_status') {

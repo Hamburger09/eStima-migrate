@@ -146,7 +146,9 @@
   "UPDATES": {
     "UPDATES": "Updates",
     "UPDATE_ID": "Update ID",
-    "COUNTRY_ID": "Country ID"
+    "COUNTRY": "Country",
+    "DATE": "Date",
+    "NAME": "Name"
   },
   "NAV": {
     "DASHBOARD": "Dashboard",

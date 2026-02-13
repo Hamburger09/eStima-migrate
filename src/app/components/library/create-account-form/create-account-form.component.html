@@ -32,13 +32,13 @@
             labelLocation="top"
             [showColonAfterLabel]="false"
           >
-            <dxi-item itemType="group">
+            <!-- <dxi-item itemType="group">
               <dxi-item>
                 <div class="form-header">
                   <h1>{{ "REGISTER.TITLE" | translate }}</h1>
                 </div>
               </dxi-item>
-            </dxi-item>
+            </dxi-item> -->
 
             <app-error-toast></app-error-toast>
 
@@ -290,7 +290,7 @@
     </dx-multi-view>
 
     <!-- Navigation Panel -->
-    <div class="nav-panel">
+    <div class="nav-panel d-flex justify-content-between align-items-center">
       <div class="current-step">
         @if (!showSuccessMessage()) {
         <span>

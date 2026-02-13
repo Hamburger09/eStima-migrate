@@ -150,7 +150,9 @@
   "UPDATES": {
     "UPDATES": "Обновления",
     "UPDATE_ID": "ID обновления",
-    "COUNTRY_ID": "ID страны"
+    "COUNTRY": "Страна",
+    "DATE": "Дата",
+    "NAME": "Название"
   },
   "NAV": {
     "DASHBOARD": "Панель управления",
