@@ -20,22 +20,22 @@
   </form>
 </app-page-header> -->
 
-<app-filter
+<!-- <app-filter
   [filters]="filterOptions"
   (onFilter)="submitFilters($event)"
   (onReset)="onReset()"
-></app-filter>
+></app-filter> -->
 
 <!-- Your table goes below -->
-
-<app-table
-  [columns]="logColumns"
-  [data]="logs()"
-  [itemsPerPage]="itemsPerPage()"
-  [currentPage]="currentPage()"
-  [actions]="false"
-></app-table>
-
+<div class="view-wrapper list-page crm-contact-list">
+  <app-table
+    [columns]="logColumns"
+    [data]="logs()"
+    [itemsPerPage]="itemsPerPage()"
+    [currentPage]="currentPage()"
+    [actions]="false"
+  ></app-table>
+</div>
 <!-- <mat-paginator
   [length]="totalPages()"
   [pageSize]="itemsPerPage()"
@@ -46,11 +46,11 @@
 >
 </mat-paginator> -->
 
-<app-smart-pagination
+<!-- <app-smart-pagination
   [totalPages]="totalPages()"
   [currentPage]="currentPage()"
   [itemsPerPage]="itemsPerPage()"
   [sizeOptions]="[5, 10, 20, 100]"
   [maxVisiblePages]="5"
   (pageChange)="onPageChange($event)"
-></app-smart-pagination>
+></app-smart-pagination> -->

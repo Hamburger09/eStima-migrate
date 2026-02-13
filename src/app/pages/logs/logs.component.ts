@@ -1,7 +1,7 @@
 import { Component, computed, OnInit, signal } from '@angular/core';
 import { LogService } from '../../services/log.service';
-import { FilterComponent } from '../../shared/components/filter/filter.component';
-import { smartPaginationComponent } from 'src/app/shared/components/pagination/smart-pagination.component';
+// import { FilterComponent } from '../../shared/components/filter/filter.component';
+// import { smartPaginationComponent } from 'src/app/shared/components/pagination/smart-pagination.component';
 import { SocketService } from '../../services/socket.service';
 import { TLog, TLogs, User } from '../../interfaces/TypesABase.interface';
 import { UserService } from '../../services/user.service';
@@ -9,12 +9,7 @@ import { TableComponent } from 'src/app/components/library/table/table.component
 import { SharedModule } from 'src/app/shared/shared.module';
 @Component({
   selector: 'app-logs',
-  imports: [
-    FilterComponent,
-    TableComponent,
-    SharedModule,
-    smartPaginationComponent,
-  ],
+  imports: [TableComponent, SharedModule],
   templateUrl: './logs.component.html',
   styleUrl: './logs.component.scss',
 })

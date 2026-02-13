@@ -166,6 +166,14 @@ export const routes: Routes = [
         },
       },
       {
+        path: 'logs',
+        loadChildren: () => import('./pages/logs/routes').then((m) => m.routes),
+        canActivate: [authGuard],
+        data: {
+          roles: [ROLES.ADMIN],
+        },
+      },
+      {
         path: 'crm-contact-list',
         component: CrmContactListComponent,
         data: {

@@ -17,7 +17,7 @@
   [(opened)]="menuOpened"
 >
   <side-navigation-menu
-    [compactMode]="!menuOpened"
+    [compactMode]="menuOpened"
     [selectedItem]="selectedRoute"
     class="dx-swatch-additional"
     *dxTemplate="let dataMenu of 'panel'"
