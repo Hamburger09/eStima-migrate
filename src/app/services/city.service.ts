@@ -10,7 +10,7 @@ import { City, ApiResponse } from '../interfaces/TypesABase.interface';
   providedIn: 'root',
 })
 export class CityService {
-  private baseUrl = `${environment.apiUrl}/cities`;
+  private baseUrl = `${environment.estimaUrl}/cities`;
 
   constructor(private http: HttpClient) {}
 

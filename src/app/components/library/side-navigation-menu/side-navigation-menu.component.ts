@@ -99,6 +99,7 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
     const role = this.authService.getRoleFromStorage() ?? '';
     const userId = this.authService.getUserIdFromStorage();
     const app_type = this.authService.getAppTypeFromStorage();
+
     let cloned;
     // start from the base navigation
     if (app_type === APP_TYPE.CABINET) {

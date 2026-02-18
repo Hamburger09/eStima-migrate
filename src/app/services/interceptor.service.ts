@@ -12,6 +12,7 @@ import {
   finalize,
   Observable,
   switchMap,
+  take,
   tap,
   throwError,
 } from 'rxjs';
@@ -38,17 +39,13 @@ export class InterceptorService implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     this.loadingService.startHttpLoading();
 
-    // ✅ Define what "our API" means
-    // If you use absolute URLs: environment.apiUrl = "http://localhost:8080/api"
     const isOurApiRequest =
-      req.url.startsWith(environment.apiUrl) || req.url.startsWith('/api'); // keep this if you use proxy + relative URLs
-
+      req.url.startsWith(environment.apiUrl) || req.url.startsWith('/api');
     const isRefreshCall = req.url.includes('/refresh-token');
 
     let modifiedReq = req;
-
-    // ✅ Add Authorization ONLY for our API, and not for refresh-token call
     const token = this.authService.getTokenFromStorage();
+
     if (isOurApiRequest && token && !isRefreshCall) {
       modifiedReq = req.clone({
         setHeaders: { Authorization: `Bearer ${token}` },
@@ -64,7 +61,6 @@ export class InterceptorService implements HttpInterceptor {
           }
         }
       }),
-
       catchError((error: HttpErrorResponse) => {
         if (!isOurApiRequest) {
           return throwError(() => error);
@@ -73,16 +69,14 @@ export class InterceptorService implements HttpInterceptor {
         const isJwtExpired = error.status === 401;
 
         if (isRefreshCall) {
-          // DON'T call logout here - let refreshToken() method handle it
           return throwError(() => error);
         }
 
         if (isJwtExpired) {
           return this.authService.refreshToken().pipe(
+            take(1), // ✅ Ensure completion
             switchMap((newToken: string | null) => {
               if (!newToken) {
-                // Token refresh failed, but don't call logout here either
-                // The refreshToken() method already handles navigation
                 return throwError(() => new Error('Token refresh failed'));
               }
 
@@ -92,7 +86,6 @@ export class InterceptorService implements HttpInterceptor {
               return next.handle(retriedReq);
             }),
             catchError((refreshError) => {
-              // Again, don't call logout - already handled
               return throwError(() => refreshError);
             })
           );
@@ -112,7 +105,6 @@ export class InterceptorService implements HttpInterceptor {
         this.errorService.showError(message);
         return throwError(() => error);
       }),
-
       finalize(() => {
         this.loadingService.stopHttpLoading();
       })

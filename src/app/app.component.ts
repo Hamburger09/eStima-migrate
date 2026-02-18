@@ -19,10 +19,17 @@ import {
 
 import { DxHttpModule } from 'devextreme-angular/http';
 
-import { LoadingService, ScreenService, ThemeService } from './services';
+import {
+  AuthService,
+  LoadingService,
+  ScreenService,
+  ThemeService,
+} from './services';
 import { DxLoadPanelModule } from 'devextreme-angular/ui/load-panel';
 import { AsyncPipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SocketService } from './services/socket.service';
+import { InactivityService } from './services/inactivity.service';
 
 @Component({
   selector: 'app-root',
@@ -42,6 +49,9 @@ export class AppComponent implements OnDestroy, OnInit {
   private themeService = inject(ThemeService);
   private screen = inject(ScreenService);
   private router = inject(Router);
+  private socketService = inject(SocketService);
+  private inactivityService = inject(InactivityService);
+  private authService = inject(AuthService);
 
   constructor(public loadingService: LoadingService) {
     this.themeService.setAppTheme();
@@ -83,6 +93,10 @@ export class AppComponent implements OnDestroy, OnInit {
           this.loadingService.stopNavigation();
         }
       });
+    if (this.authService.isLoggedIn()) {
+      this.inactivityService.startWatching(); // Start watching for user inactivity
+      this.socketService.connect(); // Connect to the socket server
+    }
   }
 
   ngOnDestroy(): void {

@@ -10,6 +10,7 @@ import notify from 'devextreme/ui/notify';
 
 import { AuthService, ThemeService, LoadingService } from 'src/app/services';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { APP_TYPE } from 'src/app/types/app_type';
 
 @Component({
   selector: 'app-login-form',
@@ -54,11 +55,11 @@ export class LoginFormComponent {
 
   projectOptions = [
     {
-      value: 'cabinet',
+      value: APP_TYPE.CABINET,
       label: '🏢 Личный кабинет',
     },
     {
-      value: 'materials',
+      value: APP_TYPE.MATERIALS,
       label: '📦 Материалы',
     },
   ];

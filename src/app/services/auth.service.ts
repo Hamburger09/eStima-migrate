@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ApiResponse } from '../interfaces/TypesABase.interface';
 import { InactivityService } from './inactivity.service';
@@ -53,17 +53,22 @@ export class AuthService {
   }
 
   // Refresh the access token using the refresh token cookie
+
   refreshToken(): Observable<string | null> {
     if (this.isRefreshing) {
-      return this.refreshTokenSubject.asObservable();
+      // Wait for the ongoing refresh to complete
+      return this.refreshTokenSubject.pipe(
+        filter((token) => token !== null),
+        take(1),
+        switchMap(() => of(this.getTokenFromStorage()))
+      );
     }
+
     this.isRefreshing = true;
+    this.refreshTokenSubject.next(null);
+
     return this.http
-      .post<any>(
-        `${this.baseUrl}/refresh-token`,
-        {}, // Consider sending refresh token in body if server expects it
-        { withCredentials: true }
-      )
+      .post<any>(`${this.baseUrl}/refresh-token`, {}, { withCredentials: true })
       .pipe(
         map((res) => {
           const { accessToken } = res.data;
@@ -77,12 +82,15 @@ export class AuthService {
           console.error('Refresh token error:', error);
           this.isRefreshing = false;
           this.refreshTokenSubject.next(null);
+
+          // Clear everything
           this.socketService.disconnect();
           localStorage.removeItem('accessToken');
           this.inactivityService.stopIdleWatch();
-          this.router.navigate(['/auth'], {
-            queryParams: { error: error.error?.error || 'Session expired' },
-          });
+
+          // DON'T navigate here - let the guard handle it
+          // this.router.navigate(['/auth'], { ... }); // ❌ REMOVE THIS
+
           return of(null);
         })
       );
@@ -91,6 +99,7 @@ export class AuthService {
   // Check if the user is logged in and handle token refresh if needed
   isLoggedIn(): Observable<boolean> {
     const token = this.getTokenFromStorage();
+
     if (!token) {
       console.log('No token found');
       return of(false);
@@ -110,8 +119,11 @@ export class AuthService {
       }),
       catchError((err) => {
         console.error('isLoggedIn refresh error:', err);
-        return of(false); // Just return false, don't navigate or clear storage here
-      })
+        // Clear token on refresh failure
+        localStorage.removeItem('accessToken');
+        return of(false);
+      }),
+      take(1) // ✅ Ensure observable completes
     );
   }
   isTokenExpired(): boolean {

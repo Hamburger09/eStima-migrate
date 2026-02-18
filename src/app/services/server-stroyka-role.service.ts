@@ -9,7 +9,7 @@ import { ApiResponse, TServerStroykaRoles } from '../interfaces/TypesABase.inter
   providedIn: 'root', // Makes it available globally
 })
 export class ServerStroykaRoleService {
-  private baseUrl = `${environment.apiUrl}/server-stroyka-roles`; // Centralized Base URL
+  private baseUrl = `${environment.estimaUrl}/server-stroyka-roles`; // Centralized Base URL
 
   constructor(private http: HttpClient,
     private authService: AuthService

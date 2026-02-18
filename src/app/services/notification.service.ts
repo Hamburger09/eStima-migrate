@@ -19,7 +19,7 @@ type TransferNotifiaction = {
 export class NotificationService {
   private notificationsSubject = new BehaviorSubject<TNotification[]>([]);
   private notifications: TNotification[] = [];
-  private baseUrl = `${environment.apiUrl}/notifications`;
+  private baseUrl = `${environment.estimaUrl}/notifications`;
   constructor(private http: HttpClient, private injector: Injector) {}
   private _authService: AuthService | null = null;
   private get authService(): AuthService {
@@ -73,11 +73,9 @@ export class NotificationService {
     if (this.notifications.length === 0) {
       this.fetchNotificationsFromServer();
     }
-    return this.notificationsSubject.asObservable()
-    .pipe(
-      map((notifications) => 
-        notifications.filter((n) => !n.is_read))
-    );;
+    return this.notificationsSubject
+      .asObservable()
+      .pipe(map((notifications) => notifications.filter((n) => !n.is_read)));
   }
 
   getNotificationsByType(type: string): Observable<TNotification[]> {
@@ -92,7 +90,7 @@ export class NotificationService {
     return this.getNotificationsByType(NotificationType.transfers);
   }
   getStroykaNotifications(): Observable<TNotification[]> {
-    const type = "server_stroyka_user" as keyof typeof NotificationType;
+    const type = 'server_stroyka_user' as keyof typeof NotificationType;
     return this.getNotificationsByType(type);
   }
 

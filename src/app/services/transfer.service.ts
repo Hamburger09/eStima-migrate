@@ -9,7 +9,7 @@ import { ApiResponse } from '../interfaces/TypesABase.interface';
   providedIn: 'root',
 })
 export class TransferService {
-  private baseUrl = `${environment.apiUrl}/transfers`; // Centralized Base URL
+  private baseUrl = `${environment.estimaUrl}/transfers`; // Centralized Base URL
 
   constructor(private http: HttpClient, private auth: AuthService) {} // Injecting HttpClient
 
@@ -27,7 +27,6 @@ export class TransferService {
       .pipe(map((response) => response.data)); // Extracting the data from the response // Making the HTTP GET request
   }
 
-
   // Method to create a new transfer
   createTransfer(transfer: TTransfer): Observable<TTransfer> {
     return this.http
@@ -38,7 +37,10 @@ export class TransferService {
   // Method to update an existing transfer
   updateTransfer(transfer: TTransfer): Observable<TTransfer> {
     return this.http
-      .put<ApiResponse<TTransfer>>(`${this.baseUrl}/update/${transfer.id}`, transfer)
+      .put<ApiResponse<TTransfer>>(
+        `${this.baseUrl}/update/${transfer.id}`,
+        transfer
+      )
       .pipe(map((response) => response.data)); // Extracting the data from the response // Making the HTTP PUT request
   }
 }

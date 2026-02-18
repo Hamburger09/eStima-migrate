@@ -10,7 +10,7 @@ import { Country, ApiResponse } from '../interfaces/TypesABase.interface';
   providedIn: 'root', // Makes it available globally
 })
 export class CountryService {
-  private baseUrl = `${environment.apiUrl}/countries`; // Centralized Base URL
+  private baseUrl = `${environment.estimaUrl}/countries`; // Centralized Base URL
 
   constructor(private http: HttpClient) {}
   // Fetch all users

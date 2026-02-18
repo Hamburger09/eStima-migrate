@@ -10,7 +10,7 @@ import { ApiResponse, User } from '../interfaces/TypesABase.interface';
   providedIn: 'root', // Makes it available globally
 })
 export class UserService {
-  private baseUrl = `${environment.apiUrl}/users`; // Centralized Base URL
+  private baseUrl = `${environment.estimaUrl}/users`; // Centralized Base URL
 
   constructor(private http: HttpClient) {}
   // Fetch all users

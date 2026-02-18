@@ -12,7 +12,7 @@ import {
   providedIn: 'root', // Makes it available globally
 })
 export class ServerStroykaService {
-  private baseUrl = `${environment.apiUrl}/server-stroyka`; // Centralized Base URL
+  private baseUrl = `${environment.estimaUrl}/server-stroyka`; // Centralized Base URL
 
   constructor(private http: HttpClient, private authService: AuthService) {}
   // Fetch all users

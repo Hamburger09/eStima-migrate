@@ -10,7 +10,7 @@ import { City, ApiResponse, User } from '../interfaces/TypesABase.interface';
   providedIn: 'root',
 })
 export class ProfileService {
-  private baseUrl = `${environment.apiUrl}/profile`;
+  private baseUrl = `${environment.estimaUrl}/profile`;
 
   constructor(private http: HttpClient) {}
 

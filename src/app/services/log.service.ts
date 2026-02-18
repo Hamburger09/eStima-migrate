@@ -9,7 +9,7 @@ import { ApiResponse, TLog, TLogs } from '../interfaces/TypesABase.interface';
   providedIn: 'root', // Makes it available globally
 })
 export class LogService {
-  private baseUrl = `${environment.apiUrl}/logs`; // Centralized Base URL
+  private baseUrl = `${environment.estimaUrl}/logs`; // Centralized Base URL
 
   constructor(private http: HttpClient) {}
   // Fetch all users
@@ -20,27 +20,27 @@ export class LogService {
     );
   }
   getLogsByPage(page: number, num: number): Observable<TLogs> {
-    return this.http.get<ApiResponse<TLogs>>(
-      `${this.baseUrl}/pages?page=${page}&num=${num}`
-    ).pipe(
-      map((response) => response.data)
-    );
+    return this.http
+      .get<ApiResponse<TLogs>>(`${this.baseUrl}/pages?page=${page}&num=${num}`)
+      .pipe(map((response) => response.data));
   }
 
   // Fetch logs by user ID
   getLogsByUserId(userId: number): Observable<TLog[]> {
-    return this.http.get<ApiResponse<TLog[]>>(
-      `${this.baseUrl}/user/${userId}`
-    ).pipe(
-      map((response) => response.data)
-    );
+    return this.http
+      .get<ApiResponse<TLog[]>>(`${this.baseUrl}/user/${userId}`)
+      .pipe(map((response) => response.data));
   }
 
-  getLogsByUserIdAndPage(userId: number, page: number, num: number): Observable<TLogs> {
-    return this.http.get<ApiResponse<TLogs>>(
-      `${this.baseUrl}/user/${userId}/pages?page=${page}&num=${num}`
-    ).pipe(
-      map((response) => response.data)
-    );
+  getLogsByUserIdAndPage(
+    userId: number,
+    page: number,
+    num: number
+  ): Observable<TLogs> {
+    return this.http
+      .get<ApiResponse<TLogs>>(
+        `${this.baseUrl}/user/${userId}/pages?page=${page}&num=${num}`
+      )
+      .pipe(map((response) => response.data));
   }
 }

@@ -9,7 +9,7 @@ import { ApiResponse, Organization } from '../interfaces/TypesABase.interface';
   providedIn: 'root', // Makes it available globally
 })
 export class OrganizationService {
-  private baseUrl = `${environment.apiUrl}/organizations`; // Centralized Base URL
+  private baseUrl = `${environment.estimaUrl}/organizations`; // Centralized Base URL
 
   constructor(private http: HttpClient) {}
   // Fetch all users

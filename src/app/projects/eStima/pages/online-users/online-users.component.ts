@@ -23,7 +23,7 @@ export class OnlineUsersComponent implements OnInit {
     key: string;
     valueGetter?: (row: any) => string;
   }[] = [
-    { label: 'USERS.USER_ID', key: 'user_id' },
+    { label: 'USERS.USER_ID', key: 'id' },
     { label: 'USERS.USER_LOGIN', key: 'user_login' },
     { label: 'USERS.ROLE', key: 'role_name' },
     {
@@ -37,6 +37,11 @@ export class OnlineUsersComponent implements OnInit {
   ngOnInit(): void {
     this.socketService.getOnlineUsers().subscribe((users: string[]) => {
       console.log('Online users received from socket:', users);
+
+      users.map((user) => {
+        user['id'] = user['user_id'];
+        delete user['user_id'];
+      });
       this.onlineUsers.set(users);
     });
   }
