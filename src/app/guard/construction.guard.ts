@@ -17,20 +17,21 @@ export const constructionGuard: CanActivateFn = (
   const router = inject(Router);
 
   const role = authService.getRoleFromStorage();
-  const url = state.url.toLowerCase().replace(/\/$/, ''); // Remove trailing slash
+  // ✅ strip both leading slash AND trailing slash
+  const url = state.url.toLowerCase().replace(/^\/|\/$/g, '');
 
   // Only ADMIN can access exactly /construction
-  if (url === '/transfers') {
+  if (url === 'cabinet/transfers') {
     return role === ROLES.ADMIN
       ? true
-      : router.parseUrl('/transfers/incoming-transfers');
+      : router.parseUrl('/cabinet/transfers/incoming-transfers');
   }
 
   // Only USER can access these child routes
   if (
     role === ROLES.USER &&
-    (url.startsWith('/transfers/incoming-transfers') ||
-      url.startsWith('/transfers/outgoing-transfers'))
+    (url.startsWith('cabinet/transfers/incoming-transfers') ||
+      url.startsWith('cabinet/transfers/outgoing-transfers'))
   ) {
     return true;
   }

@@ -52,11 +52,23 @@ export class LoginFormComponent {
     });
   }
 
+  projectOptions = [
+    {
+      value: 'cabinet',
+      label: '🏢 Личный кабинет',
+    },
+    {
+      value: 'materials',
+      label: '📦 Материалы',
+    },
+  ];
+
   onSubmit(e: Event) {
     e.preventDefault();
 
     const username = (this.formData?.username ?? '').trim();
     const password = this.formData?.password ?? '';
+    const app_type = this.formData?.app_type ?? '';
 
     if (!username || !password) {
       notify('Please enter login and password', 'warning', 2000);
@@ -66,9 +78,11 @@ export class LoginFormComponent {
     this.loading = true;
 
     // map form fields -> backend fields
-    this.authService.login(username, password).subscribe((data: any) => {
-      this.router.navigate(['/']);
-    });
+    this.authService
+      .login(username, password, app_type)
+      .subscribe((data: any) => {
+        this.router.navigate(['/']);
+      });
   }
 
   onCreateAccountClick = () => {

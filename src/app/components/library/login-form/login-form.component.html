@@ -10,6 +10,7 @@
       dataField="username"
       editorType="dxTextBox"
       [editorOptions]="{
+        placeholder: 'Enter your username',
         stylingMode: 'filled',
         mode: 'text',
       }"
@@ -32,6 +33,24 @@
         message="Password is required"
       ></dxi-validation-rule>
       <dxo-label text="{{ 'LOGIN.PASSWORD' | translate }}"></dxo-label>
+    </dxi-item>
+
+    <dxi-item
+      dataField="app_type"
+      editorType="dxRadioGroup"
+      [editorOptions]="{
+        items: projectOptions,
+        layout: 'vertical',
+        valueExpr: 'value',
+        displayExpr: 'label'
+      }"
+    >
+      <dxi-validation-rule
+        type="required"
+        message="Please select a system"
+      ></dxi-validation-rule>
+
+      <dxo-label text="Выберите систему"></dxo-label>
     </dxi-item>
 
     <!-- <dxi-item

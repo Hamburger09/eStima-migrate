@@ -19,7 +19,8 @@ import {
 import * as events from 'devextreme/events';
 import { Subscription } from 'rxjs';
 
-import { navigation as baseNavigation } from '../../../app-navigation';
+import { eStimaNavigation } from 'src/app/projects/eStima/navigation';
+import { smetaNavigation } from 'src/app/projects/smeta/navigation';
 import type { DxNavItem } from '../../../app-navigation';
 
 import { AuthService } from 'src/app/services/auth.service';
@@ -28,6 +29,7 @@ import { TServerStroykaUsers } from 'src/app/interfaces/TypesABase.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { ROLES } from 'src/app/shared/constants';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { APP_TYPE } from 'src/app/types/app_type';
 
 @Component({
   selector: 'side-navigation-menu',
@@ -96,9 +98,14 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
   private rebuildMenu(): void {
     const role = this.authService.getRoleFromStorage() ?? '';
     const userId = this.authService.getUserIdFromStorage();
-
+    const app_type = this.authService.getAppTypeFromStorage();
+    let cloned;
     // start from the base navigation
-    const cloned = this.deepClone(baseNavigation);
+    if (app_type === APP_TYPE.CABINET) {
+      cloned = this.deepClone(eStimaNavigation);
+    } else {
+      cloned = this.deepClone(smetaNavigation);
+    }
 
     // role filter first
     let filtered = this.filterByRole(cloned, role);
@@ -163,18 +170,18 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
     counts: Record<number, number>
   ): DxNavItem[] {
     return items.map((it) => {
-      let next: DxNavItem = { ...it };
+      let next: DxNavItem = { ...it, expanded: true };
 
       // normalize path with leading slash
       if (next.path && !next.path.startsWith('/')) next.path = `/${next.path}`;
 
       // CoreUI rule: /transfers admin -> no children
-      if (next.path === '/transfers' && role === ROLES.ADMIN) {
+      if (next.path === '/cabinet/transfers' && role === ROLES.ADMIN) {
         next.items = undefined;
       }
 
       // CoreUI rule: /objects children badges by index+1
-      if (next.path === '/objects' && next.items?.length) {
+      if (next.path === '/cabinet/objects' && next.items?.length) {
         next.items = next.items.map((child, index) => ({
           ...child,
           badge: { text: String(counts[index + 1] ?? 0), color: 'info' },
@@ -207,6 +214,16 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
   }
 
   onItemClick(event: DxTreeViewTypes.ItemClickEvent) {
+    const item = event.itemData as DxNavItem;
+
+    // If it has href and download flag
+    if (item.href && item.download) {
+      const link = document.createElement('a');
+      link.href = item.href;
+      link.download = '';
+      link.click();
+      return;
+    }
     this.selectedItemChanged.emit(event);
   }
 

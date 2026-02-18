@@ -26,17 +26,15 @@ export class UnauthenticatedContentComponent {
 
   get title() {
     const path = this.router.url.split('/').at(-1);
-    switch (path) {
-      case 'sign-in':
-        return 'LOGIN.TITLE';
-      case 'reset-password':
-        return 'Reset Password';
-      case 'register':
-        return 'REGISTER.TITLE';
-      case 'change-password':
-        return 'Change Password';
-      default:
-        return '';
+    console.log('Current path:', path);
+    if (path.includes('sign-in')) {
+      return 'LOGIN.TITLE';
+    } else if (path.includes('reset-password')) {
+      return 'RESET_PASSWORD.TITLE';
+    } else if (path.includes('register')) {
+      return 'REGISTER.TITLE';
+    } else if (path.includes('change-password')) {
+      return 'CHANGE_PASSWORD.TITLE';
     }
   }
 }

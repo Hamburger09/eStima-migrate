@@ -15,12 +15,18 @@
     </dxi-item>
 
     <!-- Title -->
-    <dxi-item
+    <!-- <dxi-item
       location="before"
       cssClass="header-title"
       *ngIf="title"
       [text]="title"
     >
+    </dxi-item> -->
+    <!-- Brand Logo (replaces title) -->
+    <dxi-item location="before" locateInMenu="never">
+      <div *dxTemplate>
+        <img src="assets/brand/SPS.jpg" alt="SPS Logo" class="header-logo" />
+      </div>
     </dxi-item>
 
     <!-- Search Box -->

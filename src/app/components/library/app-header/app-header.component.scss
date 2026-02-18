@@ -10,6 +10,12 @@ header {
   padding: var(--header-toolbar-vertical-padding) 0;
   background-color: var(--base-bg);
 
+  .header-logo {
+    height: 32px;
+
+    margin-right: 12px;
+  }
+
   .header-toolbar {
     padding-right: var(--content-padding);
 
@@ -38,6 +44,14 @@ header {
       width: var(--side-panel-min-width);
       text-align: center;
       padding: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header {
+    .header-logo {
+      height: 16px;
     }
   }
 }

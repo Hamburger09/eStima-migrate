@@ -177,7 +177,9 @@
     "UPDATES": "Yangilanishlar",
     "DOWNLOADS": "Yuklamalar",
     "DOWNLOADS_SETUP": "eStimaSetup.zip",
-    "DOWNLOADS_EXE": "eStima.zip"
+    "DOWNLOADS_EXE": "eStima.zip",
+    "HOME": "Bosh sahifa",
+    "SEARCH": "Qidirish"
   },
   "EXE": {
     "DOWNLOADING": "Yuklanmoqda, bu 3 daqiqagacha davom etishi mumkin...",

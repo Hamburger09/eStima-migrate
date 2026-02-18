@@ -30,11 +30,16 @@ export class AuthService {
     }
     return this._inactivityService;
   }
-  login(user_login: string, user_password: string): Observable<void> {
+  login(
+    user_login: string,
+    user_password: string,
+    app_type: string
+  ): Observable<void> {
+    localStorage.removeItem('accessToken'); // Clear any existing token before login
     return this.http
       .post<any>(
         `${this.baseUrl}/login`,
-        { user_login, user_password },
+        { user_login, user_password, app_type },
         { withCredentials: true } // Send refresh token cookie
       )
       .pipe(
@@ -140,6 +145,19 @@ export class AuthService {
     } catch (e) {
       console.error('Invalid token:', e);
       this.logout().subscribe(); // Clean up broken token
+      return null;
+    }
+  }
+
+  getAppTypeFromStorage(): string | null {
+    const token = this.getTokenFromStorage();
+    if (!token) return null;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload?.app_type || null;
+    } catch (e) {
+      console.error('Invalid token:', e);
+      this.logout().subscribe();
       return null;
     }
   }

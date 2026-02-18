@@ -11,21 +11,24 @@ import {
   UnauthenticatedContentComponent,
 } from './layouts';
 
-import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
-import { CrmContactDetailsComponent } from './pages/crm-contact-details/crm-contact-details.component';
-import { PlanningTaskListComponent } from './pages/planning-task-list/planning-task-list.component';
-import { PlanningTaskDetailsComponent } from './pages/planning-task-details/planning-task-details.component';
-import { AnalyticsDashboardComponent } from './pages/analytics-dashboard/analytics-dashboard.component';
-import { AnalyticsSalesAnalysisComponent } from './pages/analytics-sales-analysis/analytics-sales-analysis.component';
-import { AnalyticsGeographyComponent } from './pages/analytics-geography/analytics-geography.component';
-import { PlanningSchedulerComponent } from './pages/planning-scheduler/planning-scheduler.component';
-import { AppSignInComponent } from './pages/sign-in-form/sign-in-form.component';
-import { AppRegisterComponent } from './pages/register-form/register-form.component';
-import { AppResetPasswordComponent } from './pages/reset-password-form/reset-password-form.component';
-import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+// // import { CrmContactListComponent } from './pages/crm-contact-list/crm-contact-list.component';
+// import { CrmContactDetailsComponent } from './pages/crm-contact-details/crm-contact-details.component';
+// import { PlanningTaskListComponent } from './pages/planning-task-list/planning-task-list.component';
+// import { PlanningTaskDetailsComponent } from './pages/planning-task-details/planning-task-details.component';
+import { AnalyticsDashboardComponent } from './projects/eStima/pages/analytics-dashboard/analytics-dashboard.component';
+// import { AnalyticsSalesAnalysisComponent } from './pages/analytics-sales-analysis/analytics-sales-analysis.component';
+// import { AnalyticsGeographyComponent } from './pages/analytics-geography/analytics-geography.component';
+// import { PlanningSchedulerComponent } from './pages/planning-scheduler/planning-scheduler.component';
+// import { AppSignInComponent } from './pages/sign-in-form/sign-in-form.component';
+// import { AppRegisterComponent } from './pages/register-form/register-form.component';
+// import { AppResetPasswordComponent } from './pages/reset-password-form/reset-password-form.component';
+import { UserProfileComponent } from './projects/eStima/pages/user-profile/user-profile.component';
 import { noAuthGuard } from 'src/app/guard/no-auth.guard';
 import { ROLES } from 'src/app/shared/constants';
 import { authGuard } from './guard/auth.guard';
+import { APP_TYPE } from './types/app_type';
+import { ProjectGuard } from './guard/project.guard';
+import { appGuard } from './guard/app.guard';
 
 export const routes: Routes = [
   {
@@ -77,142 +80,67 @@ export const routes: Routes = [
     component: SideNavOuterToolbarComponent,
     children: [
       {
-        path: 'users',
+        path: 'cabinet',
         loadChildren: () =>
-          import('./pages/users/routes').then((m) => m.routes),
+          import('./projects/eStima/routes').then((m) => m.routes),
         data: {
+          project: APP_TYPE.CABINET,
           roles: [ROLES.ADMIN, ROLES.USER],
         },
-        canActivate: [authGuard],
+        canActivate: [appGuard],
+        runGuardsAndResolvers: 'always',
       },
       {
-        path: 'online-users',
+        path: 'materials',
         loadChildren: () =>
-          import('./pages/online-users/routes').then((m) => m.routes),
+          import('./projects/smeta/routes').then((m) => m.routes),
         data: {
+          project: APP_TYPE.MATERIALS,
           roles: [ROLES.ADMIN, ROLES.USER],
         },
-        canActivate: [authGuard],
+        runGuardsAndResolvers: 'always',
+        canActivate: [appGuard],
       },
-      {
-        path: 'roles',
-        loadChildren: () =>
-          import('./pages/roles/routes').then((m) => m.routes),
-        data: {
-          roles: [ROLES.ADMIN],
-        },
-        canActivate: [authGuard],
-      },
-      {
-        path: 'countries',
-        loadChildren: () =>
-          import('./pages/countries/routes').then((m) => m.routes),
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-        canActivate: [authGuard],
-      },
-      {
-        path: 'cities',
-        loadChildren: () =>
-          import('./pages/cities/routes').then((m) => m.routes),
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-        canActivate: [authGuard],
-      },
-      {
-        path: 'organizations',
-        loadChildren: () =>
-          import('./pages/organizations/routes').then((m) => m.routes),
-        data: {
-          roles: [ROLES.ADMIN],
-        },
-        canActivate: [authGuard],
-      },
-      {
-        path: 'transfers',
-        loadChildren: () =>
-          import('./pages/construction/routes').then((m) => m.routes),
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-        canActivate: [authGuard],
-      },
-      {
-        path: 'updates',
-        loadChildren: () =>
-          import('./pages/updates/routes').then((m) => m.routes),
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-        canActivate: [authGuard],
-      },
-      {
-        path: 'exe',
-        loadChildren: () => import('./pages/exe/routes').then((m) => m.routes),
-        canActivate: [authGuard],
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-      },
-      {
-        path: 'objects',
-        loadChildren: () =>
-          import('./pages/objects/routes').then((m) => m.routes),
-        canActivate: [authGuard],
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-      },
-      {
-        path: 'logs',
-        loadChildren: () => import('./pages/logs/routes').then((m) => m.routes),
-        canActivate: [authGuard],
-        data: {
-          roles: [ROLES.ADMIN],
-        },
-      },
-      {
-        path: 'crm-contact-list',
-        component: CrmContactListComponent,
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-        canActivate: [authGuard],
-      },
-      {
-        path: 'crm-contact-details',
-        component: CrmContactDetailsComponent,
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-        canActivate: [authGuard],
-      },
-      {
-        path: 'planning-task-list',
-        component: PlanningTaskListComponent,
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-        canActivate: [authGuard],
-      },
-      {
-        path: 'planning-task-details',
-        component: PlanningTaskDetailsComponent,
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-        canActivate: [authGuard],
-      },
-      {
-        path: 'planning-scheduler',
-        component: PlanningSchedulerComponent,
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-        canActivate: [authGuard],
-      },
+      // {
+      //   path: 'crm-contact-list',
+      //   component: CrmContactListComponent,
+      //   data: {
+      //     roles: [ROLES.ADMIN, ROLES.USER],
+      //   },
+      //   canActivate: [authGuard],
+      // },
+      // {
+      //   path: 'crm-contact-details',
+      //   component: CrmContactDetailsComponent,
+      //   data: {
+      //     roles: [ROLES.ADMIN, ROLES.USER],
+      //   },
+      //   canActivate: [authGuard],
+      // },
+      // {
+      //   path: 'planning-task-list',
+      //   component: PlanningTaskListComponent,
+      //   data: {
+      //     roles: [ROLES.ADMIN, ROLES.USER],
+      //   },
+      //   canActivate: [authGuard],
+      // },
+      // {
+      //   path: 'planning-task-details',
+      //   component: PlanningTaskDetailsComponent,
+      //   data: {
+      //     roles: [ROLES.ADMIN, ROLES.USER],
+      //   },
+      //   canActivate: [authGuard],
+      // },
+      // {
+      //   path: 'planning-scheduler',
+      //   component: PlanningSchedulerComponent,
+      //   data: {
+      //     roles: [ROLES.ADMIN, ROLES.USER],
+      //   },
+      //   canActivate: [authGuard],
+      // },
       {
         path: 'analytics-dashboard',
         component: AnalyticsDashboardComponent,
@@ -221,30 +149,30 @@ export const routes: Routes = [
         },
         canActivate: [authGuard],
       },
-      {
-        path: 'analytics-sales-analysis',
-        component: AnalyticsSalesAnalysisComponent,
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-        canActivate: [authGuard],
-      },
-      {
-        path: 'analytics-geography',
-        component: AnalyticsGeographyComponent,
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-        canActivate: [authGuard],
-      },
-      {
-        path: 'reset-password-form',
-        component: AppResetPasswordComponent,
-        data: {
-          roles: [ROLES.ADMIN, ROLES.USER],
-        },
-        canActivate: [authGuard],
-      },
+      // {
+      //   path: 'analytics-sales-analysis',
+      //   component: AnalyticsSalesAnalysisComponent,
+      //   data: {
+      //     roles: [ROLES.ADMIN, ROLES.USER],
+      //   },
+      //   canActivate: [authGuard],
+      // },
+      // {
+      //   path: 'analytics-geography',
+      //   component: AnalyticsGeographyComponent,
+      //   data: {
+      //     roles: [ROLES.ADMIN, ROLES.USER],
+      //   },
+      //   canActivate: [authGuard],
+      // },
+      // {
+      //   path: 'reset-password-form',
+      //   component: AppResetPasswordComponent,
+      //   data: {
+      //     roles: [ROLES.ADMIN, ROLES.USER],
+      //   },
+      //   canActivate: [authGuard],
+      // },
       {
         path: 'user-profile',
         component: UserProfileComponent,

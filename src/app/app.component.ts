@@ -47,7 +47,29 @@ export class AppComponent implements OnDestroy, OnInit {
     this.themeService.setAppTheme();
   }
 
+  private dismissDevExpressBanner() {
+    // DevExtreme banner takes a moment to render
+    const tryDismiss = (attempts = 0) => {
+      if (attempts > 20) return; // give up after ~2s
+
+      const polygon = document.querySelector(
+        'polygon[points="13.4 12.7 8.7 8 13.4 3.4 12.6 2.6 8 7.3 3.4 2.6 2.6 3.4 7.3 8 2.6 12.6 3.4 13.4 8 8.7 12.7 13.4 13.4 12.7"]'
+      );
+
+      if (polygon) {
+        // click the parent div (the actual clickable button)
+        const closeBtn = polygon.closest('div');
+        closeBtn?.click();
+      } else {
+        setTimeout(() => tryDismiss(attempts + 1), 0);
+      }
+    };
+
+    tryDismiss();
+  }
+
   ngOnInit(): void {
+    this.dismissDevExpressBanner();
     this.router.events
       .pipe(takeUntilDestroyed(this.#destroyRef))
       .subscribe((event) => {

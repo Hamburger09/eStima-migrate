@@ -173,7 +173,9 @@
     "UPDATES": "Updates",
     "DOWNLOADS": "Downloads",
     "DOWNLOADS_SETUP": "eStimaSetup.zip",
-    "DOWNLOADS_EXE": "eStima.zip"
+    "DOWNLOADS_EXE": "eStima.zip",
+    "HOME": "Home",
+    "SEARCH": "Search"
   },
   "EXE": {
     "DOWNLOADING": "Downloading, this may take 3 minutes...",
