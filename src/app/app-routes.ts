@@ -84,7 +84,7 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./projects/eStima/routes').then((m) => m.routes),
         data: {
-          project: APP_TYPE.CABINET,
+          project: APP_TYPE.ESTIMA,
           roles: [ROLES.ADMIN, ROLES.USER],
         },
         canActivate: [appGuard],

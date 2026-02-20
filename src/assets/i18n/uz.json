@@ -179,7 +179,8 @@
     "DOWNLOADS_SETUP": "eStimaSetup.zip",
     "DOWNLOADS_EXE": "eStima.zip",
     "HOME": "Bosh sahifa",
-    "SEARCH": "Qidirish"
+    "SEARCH": "Qidirish",
+    "PRICE_LIST": "Narxlar ro‘yxati"
   },
   "EXE": {
     "DOWNLOADING": "Yuklanmoqda, bu 3 daqiqagacha davom etishi mumkin...",

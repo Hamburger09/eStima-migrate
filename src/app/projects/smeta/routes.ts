@@ -21,4 +21,13 @@ export const routes: Routes = [
     },
     canActivate: [authGuard],
   },
+  {
+    path: 'price-list',
+    loadChildren: () =>
+      import('./pages/price-list/routes').then((m) => m.routes),
+    data: {
+      roles: [ROLES.ADMIN, ROLES.USER],
+    },
+    canActivate: [authGuard],
+  },
 ];

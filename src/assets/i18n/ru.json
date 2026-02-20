@@ -179,7 +179,8 @@
     "DOWNLOADS_SETUP": "eStimaSetup.zip",
     "DOWNLOADS_EXE": "eStima.zip",
     "HOME": "Главная",
-    "SEARCH": "Поиск"
+    "SEARCH": "Поиск",
+    "PRICE_LIST": "Прайс-лист"
   },
   "EXE": {
     "DOWNLOADING": "Загрузка, это может занять до 3 минут...",

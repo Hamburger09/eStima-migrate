@@ -1,4 +1,4 @@
 export enum APP_TYPE {
-  CABINET = 'estima',
+  ESTIMA = 'estima',
   MATERIALS = 'materials',
 }

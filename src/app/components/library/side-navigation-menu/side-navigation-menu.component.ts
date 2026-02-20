@@ -102,14 +102,15 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
 
     let cloned;
     // start from the base navigation
-    if (app_type === APP_TYPE.CABINET) {
+    if (app_type === APP_TYPE.ESTIMA) {
       cloned = this.deepClone(eStimaNavigation);
     } else {
       cloned = this.deepClone(smetaNavigation);
     }
-
     // role filter first
     let filtered = this.filterByRole(cloned, role);
+
+    console.log(filtered);
 
     // if no userId -> just apply rules + translate
     if (!userId) {
@@ -119,24 +120,25 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
     }
 
     //fetch users => counts => apply rules + translate
-    this.sub.add(
-      this.serverStroykaUserService
-        .getUsers(userId)
-        .subscribe((users: TServerStroykaUsers[]) => {
-          this.roleCounts =
-            this.serverStroykaUserService.getUserRoleCounts(users);
+    // this.sub.add(
+    //   this.serverStroykaUserService
+    //     .getUsers(userId)
+    //     .subscribe((users: TServerStroykaUsers[]) => {
+    //       this.roleCounts =
+    //         this.serverStroykaUserService.getUserRoleCounts(users);
 
-          const updated = this.applySpecialRules(
-            filtered,
-            role,
-            this.roleCounts
-          );
-          this._items = this.translateNav(updated);
+    //       const updated = this.applySpecialRules(
+    //         filtered,
+    //         role,
+    //         this.roleCounts
+    //       );
+    //       this._items = this.translateNav(updated);
 
-          // update selection after rebuild
-          queueMicrotask(() => this.setSelectedItem());
-        })
-    );
+    //       // update selection after rebuild
+    //       queueMicrotask(() => this.setSelectedItem());
+    //     })
+    // );
+    this._items = this.translateNav(filtered);
   }
 
   // ====== helpers ======

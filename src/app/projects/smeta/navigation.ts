@@ -28,10 +28,10 @@ export const smetaNavigation: DxNavItem[] = [
     roles: [ROLES.ADMIN, ROLES.USER],
   },
   {
-    key: 'add',
-    text: 'COMMON.ADD',
-    icon: 'plus',
-    path: 'materials/add',
+    key: 'price-list',
+    text: 'NAV.PRICE_LIST',
+    icon: 'price-tag',
+    path: 'materials/price-list',
     roles: [ROLES.ADMIN, ROLES.USER],
   },
 ];

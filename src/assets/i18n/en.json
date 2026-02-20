@@ -175,7 +175,8 @@
     "DOWNLOADS_SETUP": "eStimaSetup.zip",
     "DOWNLOADS_EXE": "eStima.zip",
     "HOME": "Home",
-    "SEARCH": "Search"
+    "SEARCH": "Search",
+    "PRICE_LIST": "Price List"
   },
   "EXE": {
     "DOWNLOADING": "Downloading, this may take 3 minutes...",

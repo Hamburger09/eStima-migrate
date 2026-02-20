@@ -55,7 +55,7 @@ export class LoginFormComponent {
 
   projectOptions = [
     {
-      value: APP_TYPE.CABINET,
+      value: APP_TYPE.ESTIMA,
       label: '🏢 Личный кабинет',
     },
     {
@@ -65,6 +65,7 @@ export class LoginFormComponent {
   ];
 
   onSubmit(e: Event) {
+    console.log('submit', this.formData);
     e.preventDefault();
 
     const username = (this.formData?.username ?? '').trim();
@@ -79,6 +80,7 @@ export class LoginFormComponent {
     this.loading = true;
 
     // map form fields -> backend fields
+    console.log(username, password, app_type);
     this.authService
       .login(username, password, app_type)
       .subscribe((data: any) => {
