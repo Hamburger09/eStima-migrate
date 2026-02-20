@@ -118,7 +118,7 @@ export class SideNavigationMenuComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    // fetch users => counts => apply rules + translate
+    //fetch users => counts => apply rules + translate
     this.sub.add(
       this.serverStroykaUserService
         .getUsers(userId)

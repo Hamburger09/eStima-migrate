@@ -30,6 +30,7 @@ import {
 } from 'src/app/types/analytics';
 
 import { TickerCardComponent } from 'src/app/components/library/ticker-card/ticker-card.component';
+import { SoliqService } from 'src/app/services/soliq.service';
 
 type DashboardData =
   | SalesOrOpportunitiesByCategory
@@ -57,6 +58,7 @@ type DataLoader = (startDate: string, endDate: string) => Observable<Object>;
 })
 export class HomeComponent implements OnInit {
   private service = inject(DataService);
+  private soliqService = inject(SoliqService);
 
   analyticsPanelItems = analyticsPanelItems;
   opportunities: SalesOrOpportunitiesByCategory = null;
@@ -100,6 +102,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     const [startDate, endDate] = analyticsPanelItems[4].value.split('/');
+
+    this.soliqService.getCompanyByInn('301242315').subscribe((company) => {
+      console.log('Company data:', company);
+    });
 
     this.loadData(startDate, endDate);
   }
